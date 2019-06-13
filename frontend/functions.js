@@ -27,7 +27,9 @@ function getViewportHeight() {
 
 // Returns a rectangle representation of the viewport
 function getViewportRect() {
-    return new DOMRect(0, 0, getViewportWidth(), getViewportHeight());
+    const w = getViewportWidth();
+    const h = getViewportHeight();
+    return {"x" : 0, "y" : 0, "width" : w, "height" : h, "left" : 0, "right" : w, "top" : 0, "bottom" : h};
 }
 
 // Returns empty string if input is undefined or null, otherwise it returns the input
