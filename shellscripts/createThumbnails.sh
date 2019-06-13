@@ -23,13 +23,13 @@ do
 
     for file in $files
     do
-        if ls $pathtocat/thumbnails | grep $file --quiet; then
+        filename="${file%%.*}"
+        if ls $pathtocat/thumbnails | grep $filename --quiet; then
             echo exists
         else
-            filename="${file%%.*}_thumbnail.${file##*.}"
-            echo $filename
+            new_file = "$filename_thumbnail.${file##*.}"
             #UNTESTED AS DEVIL DOES NOT HAVE IMAGEMAGICK
-            #convert -resize '200x200' -gravity center -crop '200x200' dragos.png litendragos.png
+            convert -resize '200x200' -gravity center -crop '200x200' $file $newfilename
         fi
     done
 done
