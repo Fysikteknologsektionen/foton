@@ -1,69 +1,72 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" type="text/css" href="style.css">
-    
-        <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-        <script type="module" src="gallery.js"></script>
-        <script type="text/javascript">
-            window.onload = function() {
-                const images = [{"src" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description" : "Kort beskrivning"},
-                {"src" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description" : "Sed viverra est dignissim, posuere augue eget, tempus mauris. Proin at posuere tortor, sit amet lacinia justo. Integer maximus scelerisque ipsum, non euismod nisl tempus at. Quisque egestas, nisl a sollicitudin ornare, felis eros interdum nisl, in interdum nunc lorem nec purus. Nullam efficitur justo metus, ac tincidunt turpis aliquam sagittis."},
-                {"src" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq"},
-                {"src" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description" : "Kort beskrivning"},
-                {"src" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description" : "Kort beskrivning"},
-                {"src" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description" : "Kort beskrivning"},
-                {"src" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description" : "Kort beskrivning"},
-                {"src" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description" : "Kort beskrivning"},
-                {"src" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description" : "Kort beskrivning"},
-                {"src" : "https://ftek.se/wp-content/uploads/2018/08/fantomen-fight.png", "description" : "Kort beskrivning"},
-                {"src" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description" : "Kort beskrivning"},
-                {"src" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description" : "Kort beskrivning"}];
 
-                const categories = [{ "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "title": "Kategori 1", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." },
-                { "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "title": "Kategori 1", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." },
-                { "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "title": "Kategori 1", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." }, 
-                { "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "title": "Kategori 1", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." }, 
-                { "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "title": "Kategori 1", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." }, 
-                { "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "title": "Kategori 1", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." },
-                { "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." }, 
-                { "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "title": "Kategori 1", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." }, 
-                { "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "title": "Kategori 1", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." }, ];
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="style.css">
 
-                const lightboxPane = document.createElement("lightbox-pane");
+    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script type="module" src="gallery.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            const images = [{ "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description": "Kort beskrivning" },
+            { "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description": "Sed viverra est dignissim, posuere augue eget, tempus mauris. Proin at posuere tortor, sit amet lacinia justo. Integer maximus scelerisque ipsum, non euismod nisl tempus at. Quisque egestas, nisl a sollicitudin ornare, felis eros interdum nisl, in interdum nunc lorem nec purus. Nullam efficitur justo metus, ac tincidunt turpis aliquam sagittis." },
+            { "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq" },
+            { "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description": "Kort beskrivning" },
+            { "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description": "Kort beskrivning" },
+            { "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description": "Kort beskrivning" },
+            { "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description": "Kort beskrivning" },
+            { "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description": "Kort beskrivning" },
+            { "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description": "Kort beskrivning" },
+            { "src": "https://ftek.se/wp-content/uploads/2018/08/fantomen-fight.png", "description": "Kort beskrivning" },
+            { "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description": "Kort beskrivning" },
+            { "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG_tGOcHFaO36Hw6Q1LbE6NTxe7JslSos0VVbUbEPb-ltAXCzq", "description": "Kort beskrivning" }];
 
-                images.forEach(function(image) {
-                    const lightboxImage = document.createElement("lightbox-image");
-                    for (var property in image) {
-                        if (image.hasOwnProperty(property)) {
-                            lightboxImage.setAttribute(property, image[property]);
-                        }
+            const categories = [{ "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "title": "Kategori 1", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." },
+            { "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "title": "Kategori 1", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." },
+            { "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "title": "Kategori 1", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." },
+            { "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "title": "Kategori 1", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." },
+            { "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "title": "Kategori 1", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." },
+            { "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "title": "Kategori 1", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." },
+            { "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." },
+            { "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "title": "Kategori 1", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." },
+            { "img": "https://static-cdn.sr.se/sida/images/478/2641749_520_292.jpg?preset=768x432", "title": "Kategori 1", "info": "2019-06-13, 14 bilder.", "description": "En testkategori." },];
+
+            const categoriesDiv = document.getElementById("categories");
+
+            categories.forEach(function (category) {
+                const categoryItem = document.createElement("category-item");
+                for (var property in category) {
+                    if (category.hasOwnProperty(property)) {
+                        categoryItem.setAttribute(property, category[property]);
                     }
-                    lightboxPane.appendChild(lightboxImage);
-                });
+                }
+                categoriesDiv.appendChild(categoryItem);
+            });
 
-                document.getElementById("gallery").appendChild(lightboxPane);
+            const lightboxPane = document.createElement("lightbox-pane");
 
-                const categoriesDiv = document.getElementById("categories");
-
-                categories.forEach(function(category) {
-                    const categoryItem = document.createElement("category-item");
-                    for (var property in category) {
-                        if (category.hasOwnProperty(property)) {
-                            categoryItem.setAttribute(property, category[property]);
-                        }
+            images.forEach(function (image) {
+                const lightboxImage = document.createElement("lightbox-image");
+                for (var property in image) {
+                    if (image.hasOwnProperty(property)) {
+                        lightboxImage.setAttribute(property, image[property]);
                     }
-                    categoriesDiv.appendChild(categoryItem);
-                });
-            };
-        </script>
-    </head>
-    <body>
-        <div id="page">
-            <div id="categories"></div>
-            <div id="gallery"></div>
-        </div>
-    </body>
+                }
+                lightboxPane.appendChild(lightboxImage);
+            });
+
+            document.getElementById("gallery").appendChild(lightboxPane);
+        };
+    </script>
+</head>
+
+<body>
+    <div id="page">
+        <div id="categories"></div>
+        <div id="gallery"></div>
+    </div>
+</body>
+
 </html>
