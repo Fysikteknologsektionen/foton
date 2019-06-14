@@ -2,52 +2,101 @@ var express = require('express');
 var fs = require('fs');
 var app = express();
 
+const CATEGORY_URL = '/category/';
 
-function js(){
-    //var scriptPath = __dirname + "/bassida.js"
-    //var scriptPath = __dirname + "/frontend_custom_everything/index.html"
-    var scriptPath = __dirname + "/frontend/index.html"
-    var options = {encoding:'utf-8', flag:'r'};
+var categoriesJSON = {"categories" : []};
 
-    var buffer = fs.readFileSync(scriptPath, options);
-    return buffer;
-};
+function updateCategoriesObject() {
+    var categories = [];
 
-// Generates urls on the form (urlstart + category + filename) where category is the name of the folders in bildfolder and filename is the names of the files in said folder. 
-function generatePicUrls(){
-    var bildfolder = __dirname + '/images/'
+    const urlstart = 'http://localhost:3000/images/';
+    const imageFolder = __dirname + '/images/';
 
-    function addBildUrls (category) {
-        var urlstart = 'http://localhost:3000/images/';
+    fs.readdirSync(imageFolder).forEach(function (directory) {
+        const firstImageURL = getFirstImageURL(imageFolder + directory);
 
-        var suburls = [];
-        fs.readdirSync(bildfolder + category).forEach(function(file) {
-            if (file != "thumbnails") {
-                suburls.push(urlstart + category + '/' + file);
-            }
-        });
-        return suburls
-    }
-
-    var urls = {};
-
-    fs.readdirSync(bildfolder).forEach(function(category) {
-        urls[category] = addBildUrls(category);
+        if (typeof firstImageURL !== 'undefined') {
+            categories.push({"title" : directory, "img" : urlstart + directory + '/' + firstImageURL, "link" : encodeURI(directory)});
+        }
     });
 
-    return JSON.stringify(urls);
+    categoriesJSON = JSON.stringify({"categories": categories});
 }
 
+// Update categoriesJSON every minute for now
+updateCategoriesObject();
+setInterval(updateCategoriesObject, 60000);
 
-app.get('/', function(req, res){
-	res.send('<script> var urls = ' + generatePicUrls() + ";</script>" + js());
-});
+// Find the URL of the first image in the directory
+function getFirstImageURL(directory) {
+    return fs.readdirSync(directory).find(function (file) {
+        return isImagePath(file);
+    });
+}
 
+// Naive way of checking if path is a path to an image
+function isImagePath(path) {
+    return endsWithAny(path.toLowerCase(),
+        ['.jpg', '.jpeg', '.jpe', '.jif', '.jfif', '.jfi', '.gif', '.png',
+            '.bmp', '.dib', '.ico', '.svg', '.svgz', '.webp', '.apng', '.xmb']);
+}
+
+// Checks if the string value ends with any of the suffixes
+function endsWithAny(value, suffixes) {
+    return suffixes.some(function (suffix) {
+        return value.endsWith(suffix);
+    });
+}
+
+// Naive way of adding dynamic javascript to html page: Just append it first in the head-tag
+function insertScript(html, script) {
+    const headIndex = html.indexOf('<head>') + 6;
+    return headIndex >= 0 ? html.slice(0, headIndex) + '<script type="text/javascript">' + script + '</script>' + html.slice(headIndex) : html;
+}
+
+// Loads a page displaying a list of categories
+function loadCategoryListPage(req, res) {
+    fs.readFile('frontend/index.html', 'utf8', function (err, data) {
+        if (err) {
+            load404Page(req, res);
+        } else {
+            res.send(insertScript(data, 'var categories = ' + categoriesJSON + ';'));
+        }
+    });
+}
+
+// Loads a page display the images in a category (in some sort of grid)
+function loadCategoryPage(req, res) {
+    const categoryUrlName = req.url.substr(CATEGORY_URL.length);
+
+    console.log(categoryUrlName);
+
+    if (categoryUrlName.length == 0) {
+        res.redirect('/');
+    } else {
+        // TODO 
+    }
+}
+
+// Loads a 404 page
+function load404Page(req, res) {
+    res.send('404!');
+}
+
+app.get('/index.html', loadCategoryListPage);
+app.get('/', loadCategoryListPage);
+
+app.get(CATEGORY_URL + '*', loadCategoryPage);
 
 var images = require('./images.js');
 app.use('/images', images);
 
+var nodeModules = require('./node-modules.js');
+app.use('/node_modules', nodeModules);
+
 var frontend = require('./frontend.js');
-app.use('/frontend', frontend);
+app.use('/', frontend);
+
+app.use('*', load404Page);
 
 app.listen(3000);
