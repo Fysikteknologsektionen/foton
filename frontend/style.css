@@ -42,6 +42,7 @@ lightbox-image {
     background-size: contain;
     background-position: center;
     transition: var(--animation-speed);
+    cursor: pointer;
 }
 
 lightbox-image:hover {
@@ -174,6 +175,7 @@ lightbox-image:hover {
     height: calc(var(--lightbox-icon-w) * var(--thumbnail-aspect-ratio));
     transition: var(--animation-speed) ease;
     opacity: 0.6;
+    cursor: pointer;
 }
 
 .lightbox-icon.active,
