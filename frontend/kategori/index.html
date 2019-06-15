@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="/style.css">
+
+    <script src="/packages/node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script type="module" src="/scripts/lightbox-image.js"></script>
+    <script type="module" src="/scripts/lightbox-pane.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            if (typeof img === 'undefined') {
+                //window.location.href = '/';
+                return;
+            }
+
+            const lightboxPane = document.createElement("lightbox-pane");
+
+            img.images.forEach(function (image) {
+                const lightboxImage = document.createElement("lightbox-image");
+                for (var property in image) {
+                    if (image.hasOwnProperty(property)) {
+                        lightboxImage.setAttribute(property, image[property]);
+                    }
+                }
+                lightboxPane.appendChild(lightboxImage);
+            });
+
+            document.getElementById("gallery").appendChild(lightboxPane);
+        };
+    </script>
+</head>
+
+<body>
+    <div id="page">
+        <div id="gallery"></div>
+    </div>
+</body>
+
+</html>
