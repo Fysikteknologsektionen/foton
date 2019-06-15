@@ -3,36 +3,49 @@ var fs = require('fs');
 var app = express();
 
 const CATEGORY_URL = '/category/';
+const IMAGES_URL = '/images/';
 
-var categoriesJSON = {"categories" : []};
+// Contains information on the structure of categories and images on the server. These are sent to the client to parse.
+var categoriesJSON = "";
+var imagesJSONs = {};
 
-function updateCategoriesObject() {
+// Updates the variables categoriesJSON and imagesJSONs which only needs updating when pictures/categories are added/removed from the "database"
+function updateJSON() {
     var categories = [];
+    var images = {};
 
     const urlstart = 'http://localhost:3000/images/';
-    const imageFolder = __dirname + '/images/';
+    const imageFolder = __dirname + IMAGES_URL;
 
     fs.readdirSync(imageFolder).forEach(function (directory) {
-        const firstImageURL = getFirstImageURL(imageFolder + directory);
+        var categoryImages = [];
+        fs.readdirSync(imageFolder + directory).forEach(function (file) {
+            if (isImagePath(file)) {
+                categoryImages.push({ "src": urlstart + directory + '/' + file });
+            }
+        });
 
-        if (typeof firstImageURL !== 'undefined') {
-            categories.push({"title" : directory, "img" : urlstart + directory + '/' + firstImageURL, "link" : encodeURI(directory)});
+        if (categoryImages.length > 0) {
+            var category = { 'title': directory, 'url': encodeURI(CATEGORY_URL + directory) };
+
+            if (typeof categoryImages[0].thumbnail !== 'undefined') {
+                category.img = categoryImages[0].thumbnail;
+            } else if (typeof categoryImages[0].src !== 'undefined') {
+                category.img = categoryImages[0].src;
+            }
+
+            categories.push(category);
+            images[directory] = JSON.stringify({ 'images': categoryImages });
         }
     });
 
-    categoriesJSON = JSON.stringify({"categories": categories});
+    categoriesJSON = JSON.stringify({ 'categories': categories });
+    imagesJSONs = images;
 }
 
-// Update categoriesJSON every minute for now
-updateCategoriesObject();
-setInterval(updateCategoriesObject, 60000);
-
-// Find the URL of the first image in the directory
-function getFirstImageURL(directory) {
-    return fs.readdirSync(directory).find(function (file) {
-        return isImagePath(file);
-    });
-}
+// Update categoriesJSON every minute (60000 milliseconds) for now
+updateJSON();
+setInterval(updateJSON, 60000);
 
 // Naive way of checking if path is a path to an image
 function isImagePath(path) {
@@ -56,34 +69,57 @@ function insertScript(html, script) {
 
 // Loads a page displaying a list of categories
 function loadCategoryListPage(req, res) {
-    fs.readFile('frontend/index.html', 'utf8', function (err, data) {
+    fs.readFile('frontend/categories.html', 'utf8', function (err, data) {
         if (err) {
             load404Page(req, res);
         } else {
-            res.send(insertScript(data, 'var categories = ' + categoriesJSON + ';'));
+            res.send(insertScript(data, 'const cat = ' + categoriesJSON + ';'));
         }
     });
 }
 
 // Loads a page display the images in a category (in some sort of grid)
 function loadCategoryPage(req, res) {
-    const categoryUrlName = req.url.substr(CATEGORY_URL.length);
+    const path = req.url.substr(CATEGORY_URL.length);
+    const forwardSlash = path.indexOf('/');
 
-    console.log(categoryUrlName);
+    if (forwardSlash < 0) {
+        // Urls like localhost:3000/category/brandbilder will be redirected to localhost:3000/category/brandbilder/ (<- note the extra slash)
+        res.redirect(req.url + '/');
+        return;
+    }
+
+    const categoryUrlName = decodeURI(path.substr(0, forwardSlash));
 
     if (categoryUrlName.length == 0) {
+        // Urls like localhost:3000/category/ will be redirected to localhost:3000/
         res.redirect('/');
+    } else if (imagesJSONs.hasOwnProperty(categoryUrlName)) {
+        const subDir = path.substr(forwardSlash + 1);
+
+        if (subDir.length == 0) {
+            // Urls like localhost:3000/category/brandbilder/ will return the html file for displaying an image grid (images.html)
+            fs.readFile('frontend/images.html', 'utf8', function (err, data) {
+                if (err) {
+                    load404Page(req, res);
+                } else {
+                    res.send(insertScript(data, 'const img = ' + imagesJSONs[categoryUrlName] + ';'));
+                }
+            });
+        } else {
+            // Urls like localhost:3000/category/brandbilder/style.css will be redirected to localhost:3000/style.css
+            res.redirect('/' + subDir);
+        }
     } else {
-        // TODO 
+        load404Page(req, res);
     }
 }
 
 // Loads a 404 page
 function load404Page(req, res) {
-    res.send('404!');
+    res.send('404: ' + req.url);
 }
 
-app.get('/index.html', loadCategoryListPage);
 app.get('/', loadCategoryListPage);
 
 app.get(CATEGORY_URL + '*', loadCategoryPage);
