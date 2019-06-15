@@ -2,8 +2,7 @@ var express = require('express');
 var fs = require('fs');
 var app = express();
 
-const CATEGORY_URL = '/category/';
-const IMAGES_URL = '/images/';
+const CATEGORY_URL = '/kategori/';
 
 // Contains information on the structure of categories and images on the server. These are sent to the client to parse.
 var categoriesJSON = "";
@@ -15,7 +14,7 @@ function updateJSON() {
     var images = {};
 
     const urlstart = 'http://localhost:3000/images/';
-    const imageFolder = __dirname + IMAGES_URL;
+    const imageFolder = __dirname + '/images/';
 
     fs.readdirSync(imageFolder).forEach(function (directory) {
         var categoryImages = [];
@@ -67,9 +66,11 @@ function insertScript(html, script) {
     return headIndex >= 0 ? html.slice(0, headIndex) + '<script type="text/javascript">' + script + '</script>' + html.slice(headIndex) : html;
 }
 
+const HOME_PAGE_PATH = __dirname + '/frontend/index.html';
+
 // Loads a page displaying a list of categories
-function loadCategoryListPage(req, res) {
-    fs.readFile('frontend/categories.html', 'utf8', function (err, data) {
+function loadHomePage(req, res) {
+    fs.readFile(HOME_PAGE_PATH, 'utf8', function (err, data) {
         if (err) {
             load404Page(req, res);
         } else {
@@ -78,41 +79,32 @@ function loadCategoryListPage(req, res) {
     });
 }
 
+
+const CATEGORY_PAGE_PATH = __dirname + '/frontend/kategori/index.html';
+
 // Loads a page display the images in a category (in some sort of grid)
 function loadCategoryPage(req, res) {
     const path = req.url.substr(CATEGORY_URL.length);
-    const forwardSlash = path.indexOf('/');
 
-    if (forwardSlash < 0) {
-        // Urls like localhost:3000/category/brandbilder will be redirected to localhost:3000/category/brandbilder/ (<- note the extra slash)
-        res.redirect(req.url + '/');
+    if (path.length == 0) {
+        res.redirect('/');
         return;
     }
 
-    const categoryUrlName = decodeURI(path.substr(0, forwardSlash));
+    const categoryName = decodeURI(path);
 
-    if (categoryUrlName.length == 0) {
-        // Urls like localhost:3000/category/ will be redirected to localhost:3000/
-        res.redirect('/');
-    } else if (imagesJSONs.hasOwnProperty(categoryUrlName)) {
-        const subDir = path.substr(forwardSlash + 1);
-
-        if (subDir.length == 0) {
-            // Urls like localhost:3000/category/brandbilder/ will return the html file for displaying an image grid (images.html)
-            fs.readFile('frontend/images.html', 'utf8', function (err, data) {
-                if (err) {
-                    load404Page(req, res);
-                } else {
-                    res.send(insertScript(data, 'const img = ' + imagesJSONs[categoryUrlName] + ';'));
-                }
-            });
-        } else {
-            // Urls like localhost:3000/category/brandbilder/style.css will be redirected to localhost:3000/style.css
-            res.redirect('/' + subDir);
-        }
-    } else {
+    if (!imagesJSONs.hasOwnProperty(categoryName)) {
         load404Page(req, res);
+        return;
     }
+
+    fs.readFile(CATEGORY_PAGE_PATH, 'utf8', function (err, data) {
+        if (err) {
+            load404Page(req, res);
+        } else {
+            res.send(insertScript(data, 'const img = ' + imagesJSONs[categoryName] + ';'));
+        }
+    });
 }
 
 // Loads a 404 page
@@ -120,18 +112,15 @@ function load404Page(req, res) {
     res.send('404: ' + req.url);
 }
 
-app.get('/', loadCategoryListPage);
+app.get('/', loadHomePage);
 
 app.get(CATEGORY_URL + '*', loadCategoryPage);
 
-var images = require('./images.js');
-app.use('/images', images);
-
-var nodeModules = require('./node-modules.js');
-app.use('/node_modules', nodeModules);
-
 var frontend = require('./frontend.js');
 app.use('/', frontend);
+
+var images = require('./images.js');
+app.use('/images', images);
 
 app.use('*', load404Page);
 
