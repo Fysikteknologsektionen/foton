@@ -1,0 +1,245 @@
+:root {
+    --thumbnail-aspect-ratio: calc(3/4);
+    --animation-speed: 0.2s;
+}
+
+html {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    text-align: center;
+}
+
+#page {
+    display: inline-block;
+    text-align: left;
+    max-width: 90rem;
+}
+
+#categories {
+    -webkit-columns: 2 30rem;
+    -moz-columns: 2 30rem;
+    columns: 2 30rem;
+    -webkit-column-gap: 4rem;
+    -moz-column-gap: 4rem;
+    column-gap: 4rem;
+}
+
+#gallery {
+    display: block;
+    text-align: left;
+}
+
+/* lightbox-image */
+
+lightbox-image {
+    display: inline-block;
+    width: 15rem;
+    height: calc(15rem * var(--thumbnail-aspect-ratio));
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    transition: var(--animation-speed);
+    cursor: pointer;
+}
+
+lightbox-image:hover {
+    opacity: 0.8;
+}
+
+
+/* lightbox-pane */
+
+.lightbox-backdrop {
+    --lightbox-close-h: 3rem;
+    --lightbox-icon-w: 5rem;
+
+    z-index: 1;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    background-color: black;
+    box-sizing: border-box;
+    padding-top: var(--lightbox-close-h);
+    transition: visibility 0s, opacity var(--animation-speed) linear;
+}
+
+.lightbox-backdrop.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.lightbox-backdrop.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.lightbox-close {
+    transition: var(--animation-speed) ease;
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--lightbox-close-h);
+    height: var(--lightbox-close-h);
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    font-size: 3rem;
+
+    text-align: center;
+    vertical-align: middle;
+}
+
+.lightbox-close:hover {
+    color: #999;
+    text-decoration: none;
+}
+
+.lightbox-image-content {
+    width: 100%;
+    max-width: 100%;
+    height: 70%;
+    position: relative;
+    overflow: hidden;
+}
+
+.lightbox-arrow {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 0.7rem;
+    color: white;
+    font-weight: bold;
+    font-size: 2rem;
+    transition: var(--animation-speed) ease;
+    user-select: none;
+    transform: translateY(-50%);
+    -webkit-user-select: none;
+    z-index: 2;
+    opacity: 0.8;
+}
+
+.lightbox-arrow:hover {
+    background-color: rgba(20, 20, 20, 0.6);
+    opacity: 1;
+}
+
+.lightbox-arrow.left {
+    left: 0;
+    border-radius: 0 0.5em 0.5em 0;
+}
+
+.lightbox-arrow.right {
+    right: 0;
+    border-radius: 0.5em 0 0 0.5em;
+}
+
+.lightbox-image-list {
+    white-space: nowrap;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transition: var(--animation-speed) ease;
+}
+
+.lightbox-slide {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+}
+
+.lightbox-icon-list {
+    white-space: nowrap;
+    position: absolute;
+    margin-top: 1rem;
+    transition: var(--animation-speed) ease;
+}
+
+.lightbox-icon {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    display: inline-block;
+    width: var(--lightbox-icon-w);
+    height: calc(var(--lightbox-icon-w) * var(--thumbnail-aspect-ratio));
+    transition: var(--animation-speed) ease;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.lightbox-icon.active,
+.lightbox-icon:hover {
+    opacity: 1;
+}
+
+.lightbox-description {
+    color: white;
+    box-sizing: border-box;
+    margin-top: calc(var(--lightbox-icon-w) * var(--thumbnail-aspect-ratio) + 2rem);
+    padding: 0 10%;
+    width: 100%;
+    text-align: center;
+}
+
+
+/* category-item */
+
+.category-itm {
+    transition: var(--animation-speed) ease;
+    display: block;
+    width: auto;
+    background: #F1F1F1;
+    padding: 0;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    margin: 0.5rem;
+}
+
+.category-itm:hover {
+    opacity: 0.8;
+}
+
+.category-wrapper {
+    display: inline-block;
+    padding: 0.5rem;
+}
+
+.category-image {
+    float: left;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 7rem;
+    height: 7rem;
+}
+
+.category-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.category-info {
+    margin-top: 0.2rem;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.category-text {
+    float: left;
+    padding-left: 1rem;
+}
+
+.category-description {
+    width: 100%;
+}

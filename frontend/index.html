@@ -1,62 +1,46 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <script type="text/javascript" src="frontend/functions.js"></script>
-        <script type="module" src="frontend/category_list.js"></script>
-        <script type="module" src="frontend/gallery.js"></script>
-        <script type="text/javascript">
-            window.onload = function() {
-                const images = [];
-                images.push({"src" : "https://pbs.twimg.com/profile_images/894248829008183297/qvZ10_Kw.jpg", "thumbnail" : "https://pbs.twimg.com/profile_images/894248829008183297/qvZ10_Kw.jpg", "title" : "Fantomen 1", "description" : "Detta är en bild med en beskrivning."});
-                images.push({"src" : "https://ftek.se/wp-content/uploads/2018/08/fantomen-fight.png", "title" : "Fantomen 2", "description": "Denna bild saknar thumbnail: Då används den vanliga bilden instället."});
-                images.push({"src" : "http://proletaren.se/sites/default/files/styles/article_full/public/18_fantomen.jpg?itok=UAmDBnB_&timestamp=1525273493", "description" : "Denna bild saknar titel"});
-                images.push({"src" : "https://pbs.twimg.com/profile_images/894248829008183297/qvZ10_Kw.jpg", "thumbnail" : "https://pbs.twimg.com/profile_images/894248829008183297/qvZ10_Kw.jpg", "title" : "Fantomen 1", "description" : "Detta är en bild med en beskrivning."});
-                images.push({"src" : "https://ftek.se/wp-content/uploads/2018/08/fantomen-fight.png", "title" : "Fantomen 2", "description": "Denna bild saknar thumbnail: Då används den vanliga bilden instället."});
-                images.push({"src" : "http://proletaren.se/sites/default/files/styles/article_full/public/18_fantomen.jpg?itok=UAmDBnB_&timestamp=1525273493", "description" : "Denna bild saknar titel"});
-                images.push({"src" : "https://pbs.twimg.com/profile_images/894248829008183297/qvZ10_Kw.jpg", "thumbnail" : "https://pbs.twimg.com/profile_images/894248829008183297/qvZ10_Kw.jpg", "title" : "Fantomen 1", "description" : "Detta är en bild med en beskrivning."});
-                images.push({"src" : "https://ftek.se/wp-content/uploads/2018/08/fantomen-fight.png", "title" : "Fantomen 2", "description": "Denna bild saknar thumbnail: Då används den vanliga bilden instället."});
-                images.push({"src" : "http://proletaren.se/sites/default/files/styles/article_full/public/18_fantomen.jpg?itok=UAmDBnB_&timestamp=1525273493", "description" : "Denna bild saknar titel"});
-                images.push({"src" : "https://pbs.twimg.com/profile_images/894248829008183297/qvZ10_Kw.jpg", "thumbnail" : "https://pbs.twimg.com/profile_images/894248829008183297/qvZ10_Kw.jpg", "title" : "Fantomen 1", "description" : "Detta är en bild med en beskrivning."});
-                images.push({"src" : "https://ftek.se/wp-content/uploads/2018/08/fantomen-fight.png", "title" : "Fantomen 2", "description": "Denna bild saknar thumbnail: Då används den vanliga bilden instället."});
-                images.push({"src" : "http://proletaren.se/sites/default/files/styles/article_full/public/18_fantomen.jpg?itok=UAmDBnB_&timestamp=1525273493", "description" : "Denna bild saknar titel"});
-                images.push({"src" : "https://pbs.twimg.com/profile_images/894248829008183297/qvZ10_Kw.jpg", "thumbnail" : "https://pbs.twimg.com/profile_images/894248829008183297/qvZ10_Kw.jpg", "title" : "Fantomen 1", "description" : "Detta är en bild med en beskrivning."});
-                images.push({"src" : "https://ftek.se/wp-content/uploads/2018/08/fantomen-fight.png", "title" : "Fantomen 2", "description": "Denna bild saknar thumbnail: Då används den vanliga bilden instället."});
-                images.push({"src" : "http://proletaren.se/sites/default/files/styles/article_full/public/18_fantomen.jpg?itok=UAmDBnB_&timestamp=1525273493", "description" : "Denna bild saknar titel"});
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="/style.css">
 
-                const categories = [];
-                categories.push({"name" : "Detta är kategori 1:s titel", "info" : "5/3-2018, 89 bilder.", "description": "Det finns många olika varianter av Lorem Ipsum, men majoriteten av dessa har ändrats på någotvis. Antingen med inslag av humor, eller med inlägg av ord som knappast ser trovärdiga ut. Skall man använda långa stycken av Lorem Ipsum bör man försäkra sig om att det inte gömmer sig något pinsamt mitt i texten. Lorem Ipsum-generatorer på internet tenderar att repetera Lorem Ipsum-texten styckvis efter behov", "img" : "https://pbs.twimg.com/profile_images/894248829008183297/qvZ10_Kw.jpg", "link" : "http://www.w3schools.com"});
-                categories.push({"name" : "Kategori 2", "info" : "5/3-2018, 4 bilder.", "description": "En kategoribeskrivning som inte behöver vara lång", "img" : "https://ftek.se/wp-content/uploads/2018/08/fantomen-fight.png", "link" : "http://www.w3schools.com"});
-                categories.push({"name" : "Detta är kategori 1:s titel", "info" : "5/3-2018, 89 bilder.", "description": "Det finns många olika varianter av Lorem Ipsum, men majoriteten av dessa har ändrats på någotvis. Antingen med inslag av humor, eller med inlägg av ord som knappast ser trovärdiga ut. Skall man använda långa stycken av Lorem Ipsum bör man försäkra sig om att det inte gömmer sig något pinsamt mitt i texten. Lorem Ipsum-generatorer på internet tenderar att repetera Lorem Ipsum-texten styckvis efter behov", "img" : "https://pbs.twimg.com/profile_images/894248829008183297/qvZ10_Kw.jpg", "link" : "http://www.w3schools.com"});
-                categories.push({"name" : "Kategori 2", "info" : "5/3-2018, 4 bilder.", "description": "En kategoribeskrivning som inte behöver vara lång", "img" : "https://ftek.se/wp-content/uploads/2018/08/fantomen-fight.png", "link" : "http://www.w3schools.com"});
-                categories.push({"name" : "Detta är kategori 1:s titel", "info" : "5/3-2018, 89 bilder.", "description": "Det finns många olika varianter av Lorem Ipsum, men majoriteten av dessa har ändrats på någotvis. Antingen med inslag av humor, eller med inlägg av ord som knappast ser trovärdiga ut. Skall man använda långa stycken av Lorem Ipsum bör man försäkra sig om att det inte gömmer sig något pinsamt mitt i texten. Lorem Ipsum-generatorer på internet tenderar att repetera Lorem Ipsum-texten styckvis efter behov", "img" : "https://pbs.twimg.com/profile_images/894248829008183297/qvZ10_Kw.jpg", "link" : "http://www.w3schools.com"});
-                categories.push({"name" : "Kategori 2", "info" : "5/3-2018, 4 bilder.", "description": "En kategoribeskrivning som inte behöver vara lång", "img" : "https://ftek.se/wp-content/uploads/2018/08/fantomen-fight.png", "link" : "http://www.w3schools.com"});
+    <script src="/packages/node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script type="module" src="/scripts/category-item.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            if (typeof cat === 'undefined') {
+                window.location.href = '/';
+                return;
+            }
 
-                const categoryTest = document.createElement("category-list");
-                categoryTest.setProperties(categories);
-                document.getElementById("categories").appendChild(categoryTest);
+            const categoriesDiv = document.getElementById("categories");
 
-                const galleryTest = document.createElement("gallery-component");
-                galleryTest.setProperties(images);
-                document.getElementById("gallery").appendChild(galleryTest);
-            };
-        </script>
+            cat.categories.forEach(function (category) {
+                const categoryItem = document.createElement("category-item");
+                for (var property in category) {
+                    if (category.hasOwnProperty(property)) {
+                        categoryItem.setAttribute(property, category[property]);
+                    }
+                }
+                const url = category.url;
+                categoryItem.onclick = function() {
+                    window.location = url;
+                };
 
-        <link rel="stylesheet" type="text/css" href="frontend/style.css">
-    </head>
-    <body>
-        <div id="page">
-             <div id="page-content">
-                <div id="categories">
-                    <h1>Exempel på hur skriptet genererar en lista över kategorier.</h1>
-                    <p><b>Utseendet på denna sida är oviktigt, tänk bara på funktionaliteten.</b> Css:en kan ändras sedan.</p>
-                    <p>Alla bilder laddas in dynamiskt när de blir synliga för användaren. För att se denna effekt tydligt, ddos:a dig själv (Destu långsammare internet destu tydligare) och stäng av browser caching (det senare är speciellt viktigt på denna sida där det bara finns tre bilder. Annars laddar webbläsaren bara in dessa tre en gång och chillar sedan.). Alternativt använd bara diagnostiseringsverktygen i din browser.</p>
-                </div>
-                <div id="gallery">
-                    <h1>Exempel på hur skriptet genererar previews.</h1><p>Dessa bilder är thumbnails som teoretiskt sätt kan ha mindre upplösning. De laddas in automatiskt när man skrollar. Just nu preloadas i princip ingenting så att man ska se hur saker laddas in när man skrollar runt. Klickar man på bilderna öppnas en lightbox där de fullstora bilderna visas. En annan ide är att thumbnailsen är stora nog att de duger att visa i lightboxen också, och sedan ha en länk man kan klicka på vid varje bild för att öppa en separat länk till den fullstora bilden.</p>
-                </div>
-             </div>
-        </div>
-    </body>
+                categoriesDiv.appendChild(categoryItem);
+            });
+
+            const lightboxPane = document.createElement("lightbox-pane");
+        };
+    </script>
+</head>
+
+<body>
+    <div id="page">
+        <div id="categories"></div>
+    </div>
+</body>
+
 </html>
