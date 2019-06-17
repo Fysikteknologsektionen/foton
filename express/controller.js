@@ -1,22 +1,18 @@
-const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const { param, check, validationResult } = require('express-validator/check');
-const bodyParser = require('body-parser');
+const { param } = require('express-validator/check');
 
-const app = express();
-
-app.use(express.static(__dirname));
-app.use(bodyParser.json());
-
-const filespath = __dirname + '/files/';
+const filespath = path.join(__dirname, '..', 'files');
 
 const extensions = ['.jpg', '.jpeg', '.jpe', '.jif', '.jfif', '.jfi', '.gif', '.png',
 '.bmp', '.dib'];
 
+exports.validate = (() => {
+    return param('id').isString().escape();
+});
 
 // Returns JSON containing list of all albums in ascending order
-app.get('/album', (req, res, next) => {
+exports.albumList = ((req, res, next) => {
     fs.readdir(filespath, { withFileTypes: true }, (err, files) => {
         if (err) next(err);
         else {
@@ -30,20 +26,18 @@ app.get('/album', (req, res, next) => {
 });
 
 // Returns JSON containing name, authors, thumbnail image, order and list of images contained in album in ascending order
-app.get('/album/:id', [
-    param('id').isString().escape()
-], (req, res, next) => {
+exports.albumDetail = ((req, res, next) => {
     var response = {};
-    // Construct promises for faster async filesystem interaction
+    // Uses promises for faster async filesystem interaction
     var promises = [
         new Promise((resolve, reject) => {
-            fs.readFile(filespath + req.params.id + '/meta.json', (err, data) => {
+            fs.readFile(path.join(filespath, req.params.id, 'meta.json'), (err, data) => {
                 if (err) reject(err);
                 else return resolve(metadata = JSON.parse(data));
             });
         }),
         new Promise((resolve, reject) => {
-            fs.readdir(filespath + req.params.id, { withFileTypes: true }, (err, files) => {
+            fs.readdir(path.join(filespath, req.params.id), { withFileTypes: true }, (err, files) => {
                 if (err) reject(err);
                 else {
                     var images = files.filter((item) => {
@@ -65,11 +59,8 @@ app.get('/album/:id', [
     });
 });
 
-// Returns JSON containing image path and thumbnail path
-app.get('/image/:id', (req, res) => {
+exports.imageDetail = ((req, res) => {
+    
     
 });
 
-app.listen(3000, () => {
-  console.log('Express listening on port 3000');
-});
