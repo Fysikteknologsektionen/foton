@@ -15,9 +15,8 @@ app.use(express.static(path.join(__dirname, 'files')));
 
 app.use('/', router);
 
-// Should be __dirname/build/index.html during production
 app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'))
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
 });
 
 app.listen(port, () => {
