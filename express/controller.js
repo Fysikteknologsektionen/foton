@@ -25,9 +25,9 @@ exports.albumList = (async (req, res, next) => {
         console.error('Failed to load albums');
         return res.status(500);
     }
-        
-    const directories = files.filter((file) => file.isDirectory());
-    const albums = directories.map((directory) => directory.name);
+
+    const directories = files.filter(file => file.isDirectory());
+    const albums = directories.map(directory => directory.name);
 
     if (albums.length == 0) return res.status(204).send();
 
@@ -35,7 +35,7 @@ exports.albumList = (async (req, res, next) => {
         try {
             const meta = await readFile(path.join(filespath, album, 'meta.json'));
             const json = JSON.parse(meta);
-            
+
             const props = ['name', 'description', 'author', 'date', 'thumbnail', 'order'];
             const keys = Object.keys(json);
             if (!props.every(prop => keys.includes(prop))) {
@@ -80,7 +80,6 @@ exports.albumDetail = ((req, res, next) => {
 });
 
 exports.imageDetail = ((req, res) => {
-    
-    
+
 });
 
