@@ -5,3 +5,5 @@ $> cd foton
 $> npm install
 $> npm run dev
 ```
+
+Gallery visable att localhost:3000/gallery
