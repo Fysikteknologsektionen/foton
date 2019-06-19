@@ -1,30 +1,50 @@
 body {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 12pt;
 }
-
-header {
-  width: 100%;
+.logo-wrapper {
+  max-width: 1400px;
+  margin: 16px auto 8px auto;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
-header p {
-  text-align: center
+.logo-wrapper p {
+  padding: 0;
+  margin: 0;
 }
 
 .logo {
-  margin: auto;
-  width: 250px;
   height: auto;
+  margin: 0 48px;
+}
+
+.logo img {
+  width: inherit;
+}
+
+.logo-foton {
+  width: 220px;
+}
+
+.logo-ftek {
+  width: 96px;
 }
 
 main {
-  max-width: 1400px;
-  margin: auto;
+  background-color: #fafafa;
+  padding: 8px 0;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .gallery-wrapper {
+  max-width: 1400px;
+  margin: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   grid-gap: 20px 20px;
@@ -46,6 +66,5 @@ footer a {
 }
 
 footer a:hover {
-  text-decoration: underline;
   color: #0366d6;
 }
