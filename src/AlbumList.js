@@ -29,7 +29,7 @@ class AlbumList extends React.Component {
     });
     return (
         <main>
-          <div className='gallery-wrapper'>
+          <div className='wrapper wrapper-albums'>
             {sortedAlbums.map(album => (
               <AlbumThumbnail {...album} key={album.id} />
             ))}

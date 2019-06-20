@@ -18,13 +18,11 @@ class AlbumThumbnail extends React.Component {
     const meta = this.state;
     const url = `/${meta.id}/${meta.thumbnail}`;
     return (
-      <div className='album-wrapper'>
+      <div className='album'>
         <img className='image-thumbnail' src={url} alt={meta.name} />
-        <div className='album-name'>
-          {meta.name}
-        </div>
-        <div className='album-date'>
-          {meta.date}
+        <div className='album-meta'>
+          <p className='album-name'>{meta.name}</p>
+          <p className='album-date'>{meta.date}</p>
         </div>
       </div>
     );

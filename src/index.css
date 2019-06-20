@@ -1,8 +1,9 @@
 body {
-  font-family: Verdana, sans-serif;
+  font-family: 'Roboto', Arial, sans-serif;
   margin: 0;
   padding: 0;
   font-size: 12pt;
+  color: #333333;
 }
 .logo-wrapper {
   max-width: 1400px;
@@ -36,17 +37,20 @@ body {
 }
 
 main {
-  background-color: #fafafa;
-  padding: 8px 0;
-  border-top: 1px solid #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
+  background-color: #f8f8f8;
+  padding: 8px 30px;
+  border-top: 1px solid #cecece ;
+  border-bottom: 1px solid #cecece ;
 }
 
-.gallery-wrapper {
-  max-width: 1400px;
+.wrapper {
+  max-width: 1340px;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+}
+
+.wrapper-albums {
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   grid-gap: 20px 20px;
 }
 
@@ -56,13 +60,29 @@ main {
   border-radius: 10px;
 }
 
+.album-meta {
+  margin: 5px 0 0 10px;
+}
+
+.album-meta p {
+  margin: 0;
+}
+
+.album-name {
+  font-size: 12pt;
+}
+
+.album-date {
+  font-size: 10pt;
+}
+
 footer {
   text-align: center;
 }
 
 footer a {
   text-decoration: none;
-  color: #000;
+  color: inherit;
 }
 
 footer a:hover {
