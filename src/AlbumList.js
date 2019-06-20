@@ -1,5 +1,5 @@
 import React from 'react';
-import AlbumThumbnail from './AlbumThumbnail'
+import AlbumThumbnail from './AlbumThumbnail';
 
 class AlbumList extends React.Component {
   constructor(props) {
