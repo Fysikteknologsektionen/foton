@@ -1,11 +1,9 @@
 import React from 'react';
 
-class Page404 extends React.Component {
-  render() {
+function Page404() {
     return (
-        <div></div>
+		<div>Bad URL</div>
     );
-  }
 }
 
 export default Page404;

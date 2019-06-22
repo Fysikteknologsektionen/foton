@@ -20,5 +20,5 @@ app.get('/*', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log('Express listening on port 3002');
+  console.log(`Express listening on port ${port}`);
 });
