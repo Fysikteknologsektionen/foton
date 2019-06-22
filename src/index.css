@@ -1,0 +1,90 @@
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 12pt;
+  color: #333333;
+}
+.logo-wrapper {
+  max-width: 1400px;
+  margin: 16px auto 8px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.logo-wrapper p {
+  padding: 0;
+  margin: 0;
+}
+
+.logo {
+  height: auto;
+  margin: 0 48px;
+}
+
+.logo img {
+  width: inherit;
+}
+
+.logo-foton {
+  width: 220px;
+}
+
+.logo-ftek {
+  width: 96px;
+}
+
+main {
+  background-color: #f8f8f8;
+  padding: 8px 30px;
+  border-top: 1px solid #cecece ;
+  border-bottom: 1px solid #cecece ;
+}
+
+.wrapper {
+  max-width: 1340px;
+  margin: auto;
+  display: grid;
+}
+
+.wrapper-albums {
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-gap: 20px 20px;
+}
+
+.image-thumbnail {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.album-meta {
+  margin: 5px 0 0 10px;
+}
+
+.album-meta p {
+  margin: 0;
+}
+
+.album-name {
+  font-size: 12pt;
+}
+
+.album-date {
+  font-size: 10pt;
+}
+
+footer {
+  text-align: center;
+}
+
+footer a {
+  text-decoration: none;
+  color: inherit;
+}
+
+footer a:hover {
+  color: #0366d6;
+}
