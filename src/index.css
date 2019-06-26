@@ -55,11 +55,6 @@ main {
   display: grid;
 }
 
-.wrapper-albums {
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  grid-gap: 20px 20px;
-}
-
 .album-meta {
   margin: 5px 0 0 10px;
 }

@@ -32,7 +32,7 @@ class AlbumList extends React.Component {
     //wrapper wrapper-albums
     return (
       <main>
-        <GalleryGrid>
+        <GalleryGrid class="wrapper">
           {sortedAlbums.map(album => (
             <Link
               className="undecorated"
