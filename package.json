@@ -14,19 +14,16 @@
   },
   "homepage": "https://github.com/ECarlsson/foton#readme",
   "dependencies": {
-    "@webcomponents/webcomponentsjs": "^2.2.10",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "express-validator": "^5.3.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
-    "vendor-copy": "^2.0.0"
+    "react-scripts": "3.0.1"
   },
   "scripts": {
     "dev": "concurrently \"nodemon server.js\" \"npm start\"",
-    "postinstall": "vendor-copy",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -51,15 +48,5 @@
   "devDependencies": {
     "concurrently": "^4.1.0",
     "nodemon": "^1.19.1"
-  },
-  "vendorCopy": [
-    {
-      "from": "node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js",
-      "to": "public/vendor/webcomponentsjs/webcomponents-loader.js"
-    },
-    {
-      "from": "node_modules/@webcomponents/webcomponentsjs/bundles",
-      "to": "public/vendor/webcomponentsjs/bundles"
-    }
-  ]
+  }
 }

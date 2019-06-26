@@ -71,10 +71,7 @@ exports.albumDetail = (async (req, res) => {
   }
   
   const imageFiles = files.filter(file => extensions.includes(path.extname(file.name)));
-  const response = {
-    images: imageFiles.map(image => image.name)
-  };
-
+  const response = imageFiles.map(image => image.name)
   return res.json(response);
 });
 

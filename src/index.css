@@ -55,6 +55,27 @@ main {
   display: grid;
 }
 
+.wrapper a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.wrapper-albums {
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-gap: 20px 20px;
+}
+
+.wrapper-images {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-gap: 16px 16px;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
 .album-meta {
   margin: 5px 0 0 10px;
 }
