@@ -16,7 +16,7 @@ function App() {
                 <Switch>
                     <Route exact path="/" component={AlbumList} />
                     <Route path="/album/:albumId/" component={AlbumDetails} />
-                    <Route path="/album/:albumId/:imageId/" component={ImageDetails} />
+                    {/* <Route path="/album/:albumId/:imageId/" component={ImageDetails} /> */}
                     <Route component={Page404} />
                 </Switch>
             </Router>
