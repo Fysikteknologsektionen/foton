@@ -1,4 +1,5 @@
 import React from 'react';
+import GalleryImg from './GalleryImg';
 
 class AlbumThumbnail extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class AlbumThumbnail extends React.Component {
     const url = `/${meta.id}/${meta.thumbnail}`;
     return (
       <div className='album'>
-        <img className='image-thumbnail' src={url} alt={meta.name} />
+        <GalleryImg src={url} alt={meta.name} aspect-ratio='1.5' />
         <div className='album-meta'>
           <p className='album-name'>{meta.name}</p>
           <p className='album-date'>{meta.date}</p>

@@ -11,16 +11,16 @@ import Page404 from './Page404';
 function App() {
     return (
         <React.Fragment>
-            <Header />
             <Router>
+                <Header />
                 <Switch>
                     <Route exact path="/" component={AlbumList} />
                     <Route path="/album/:albumId/" component={AlbumDetails} />
-                    <Route path="/album/:albumId/:imageId/" component={ImageDetails} />
+                    {/* <Route path="/album/:albumId/:imageId/" component={ImageDetails} /> */}
                     <Route component={Page404} />
                 </Switch>
+                <Footer />
             </Router>
-            <Footer />
         </React.Fragment>
     );
 }
