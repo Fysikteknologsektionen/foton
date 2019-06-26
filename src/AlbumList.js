@@ -1,12 +1,14 @@
-import React from 'react';
-import AlbumThumbnail from './AlbumThumbnail';
+import React from "react";
+import AlbumThumbnail from "./AlbumThumbnail";
+import { Link } from "react-router-dom";
+import GalleryGrid from "./GalleryGrid";
 
 class AlbumList extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      albums: [],
+      albums: []
     };
   }
 
@@ -18,23 +20,31 @@ class AlbumList extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/albums/')
-    .then(res => this.testForErrors(res))
-    .then(data => this.setState({albums: data}));
+    fetch("/albums/")
+      .then(res => this.testForErrors(res))
+      .then(data => this.setState({ albums: data }));
   }
 
   render() {
     var sortedAlbums = this.state.albums.sort((a, b) => {
       return a.order - b.order;
     });
+    //wrapper wrapper-albums
     return (
-        <main>
-          <div className='wrapper wrapper-albums'>
-            {sortedAlbums.map(album => (
+      <main>
+        <GalleryGrid>
+          {sortedAlbums.map(album => (
+            <Link
+              className="undecorated"
+              to={`/album/${album.id}`}
+              key={album.id}
+              slot="image"
+            >
               <AlbumThumbnail {...album} key={album.id} />
-            ))}
-          </div>
-        </main>
+            </Link>
+          ))}
+        </GalleryGrid>
+      </main>
     );
   }
 }

@@ -5,6 +5,12 @@ body {
   font-size: 12pt;
   color: #333333;
 }
+
+a.undecorated {
+  color: black;
+  text-decoration: none;
+}
+
 .logo-wrapper {
   max-width: 1400px;
   margin: 16px auto 8px auto;
@@ -52,12 +58,6 @@ main {
 .wrapper-albums {
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   grid-gap: 20px 20px;
-}
-
-.image-thumbnail {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
 }
 
 .album-meta {
