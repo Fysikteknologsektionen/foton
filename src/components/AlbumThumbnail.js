@@ -17,8 +17,8 @@ export default function AlbumThumbnail(props) {
       alt={meta.name} 
       onError={changeToFallbackImage} />
       <div className="album-meta">
-        <p className="album-name">{meta.name}</p>
-        <p className="album-date">{meta.date}</p>
+        <p className="name">{meta.name}</p>
+        <p className="date">{meta.date}</p>
       </div>
     </div>
   );

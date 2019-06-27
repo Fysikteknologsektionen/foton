@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import ImageThumbnail from './components/ImageThumbnail';
 
 export default function ImageView(props) {
   const [album, setAlbum] = useState({
@@ -28,19 +29,21 @@ export default function ImageView(props) {
   return (
     <main>
       <div className="images-meta">
-        <span className="back-button">
-          <Link to="/">
-            &lt; Tillbaka
-          </Link>
-        </span>
+        <h1 className="name">{album.name}</h1>
+        <span className="date">{album.date}</span>
+        <span className="author"> | av {album.author}</span>
+        <p className="description">{album.description}</p>
       </div>
       <div className="wrapper wrapper-images">
         {sortedImages.map(image => (
-          <div className="thumbnail">
-            <img src={`/${album.id}/${image}`} alt={album.name} key={image} />
-          </div>
+          <ImageThumbnail album={album.id} image={image} />
         ))}
       </div>
+      <div className="back-button">
+          <Link to="/">
+            &lt; Tillbaka
+          </Link>
+        </div>
       <div className="lightbox">
         
       </div>
