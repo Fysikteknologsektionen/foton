@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AlbumThumbnail from './components/AlbumThumbnail';
 
-export default function AlbumView(props) {
-  const albums = props.albums;
+export default function AlbumView() {
+  const [albums, setAlbums] = useState([]);
+
+  function testForErrors(res) {
+    if (!res.ok) {
+      throw new Error(`${res.status} ${res.statusText}`);
+    }
+    return res.json();
+  };
+  
+  useEffect(() => {
+    fetch('/albums')
+    .then(res => testForErrors(res))
+    .then(data => setAlbums(data))
+    .catch(error => {
+      console.error(error);
+    });
+  }, []);
 
   const sortedAlbums = albums.sort((a, b) => {
     return a.order - b.order;

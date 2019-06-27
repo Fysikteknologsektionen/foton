@@ -18,13 +18,27 @@ exports.validate = [
   .escape()
 ];
 
-// Returns JSON containing list of meta info for all albums
+// Read file and parse JSON data
+async function readMetaFile(albumId) {
+  const meta = await readFile(path.join(filespath, albumId, 'meta.json'));
+  return JSON.parse(meta);
+}
+
+// Check if json object contains all keys passed as params 
+function checkMetaKeys(keys, json) {
+  const fileKeys = Object.keys(json);
+  if (!keys.every(key => fileKeys.includes(key))) {
+    throw new Error(`Keys missing from meta.json in album '${json.name}'`);
+  }
+}
+
+// Returns JSON containing list of all albums and album meta
 exports.albumList = (async (req, res) => {
   var files = [];
   try {
     files = await readdir(filespath, { withFileTypes: true });
   } catch (err) {
-    console.error('Failed to load albums');
+    console.error(err);
     return res.status(500).send();
   }
       
@@ -36,15 +50,8 @@ exports.albumList = (async (req, res) => {
   // Returns array of promises that are resolved async
   const promises = albums.map(async album => {
     try {
-      const meta = await readFile(path.join(filespath, album, 'meta.json'));
-      const json = JSON.parse(meta);
-      
-      // Check if all required meta tags exist in file
-      const props = ['name', 'description', 'author', 'date', 'thumbnail', 'order'];
-      const keys = Object.keys(json);
-      if (!props.every(prop => keys.includes(prop))) {
-        throw new Error(`Keys missing from meta.json in '${album}'`);
-      }
+      var json = await readMetaFile(album);
+      checkMetaKeys(['name', 'date', 'thumbnail', 'order'], json);
       json.id = album;
       return json;
     } catch (err) {
@@ -54,24 +61,41 @@ exports.albumList = (async (req, res) => {
     }
   });
 
-  Promise.all(promises).then(response => {
+  Promise.all(promises).then(json => {
+    const response = json.map(album => ({
+      id: album.id,
+      name: album.name,
+      date: album.date,
+      thumbnail: album.thumbnail
+    }));
     return res.json(response);
   });
 });
 
-// Returns JSON containing list of images contained in album
+// Returns JSON containing album meta nd list of images
 exports.albumDetail = (async (req, res) => {
   const album = req.params.id;
   var files = [];
+  var meta = {};
   try {
       files = await readdir(path.join(filespath, album), { withFileTypes: true });
   } catch (err) {
-      console.error(`Failed to load album ${album}`);
-      return res.status(500);
+      console.error(err);
+      return res.status(500).send();
+  }
+  try {
+    const json = await readMetaFile(album);
+    checkMetaKeys(['name', 'description', 'author', 'date'], json);
+    meta = json;
+    meta.id = album;
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send();
   }
   
   const imageFiles = files.filter(file => extensions.includes(path.extname(file.name)));
-  const response = imageFiles.map(image => image.name)
+  var response = meta;
+  response.images = imageFiles.map(image => image.name);
   return res.json(response);
 });
 

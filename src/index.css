@@ -96,6 +96,10 @@ footer {
   text-align: center;
 }
 
+footer div {
+  margin: 16px 0;
+}
+
 footer a {
   text-decoration: none;
   color: inherit;

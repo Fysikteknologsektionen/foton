@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function ImageView(props) {
-  const [images, setImages] = useState([]);
+  const [album, setAlbum] = useState({
+    images: []
+  });
   const albumId = props.match.params.albumId;
 
   function testForErrors(res) {
@@ -10,24 +13,31 @@ export default function ImageView(props) {
     }
     return res.json();
   };
-
+  
   useEffect(() => {
     fetch(`/albums/${albumId}`)
-      .then(res => testForErrors(res))
-      .then(data => setImages(data));
-  });
+    .then(res => testForErrors(res))
+    .then(data => setAlbum(data))
+    .catch(error => {
+      console.error(error);
+    });
+  }, [albumId]);
 
-  const sortedImages = images.sort();
-
+  const sortedImages = album.images.sort();
+  
   return (
     <main>
       <div className="images-meta">
-
+        <span className="back-button">
+          <Link to="/">
+            &lt; Tillbaka
+          </Link>
+        </span>
       </div>
       <div className="wrapper wrapper-images">
         {sortedImages.map(image => (
           <div className="thumbnail">
-            <img src={`/${albumId}/${image}`} key={image} />
+            <img src={`/${album.id}/${image}`} alt={album.name} key={image} />
           </div>
         ))}
       </div>
