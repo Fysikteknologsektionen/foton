@@ -14,4 +14,4 @@ A list of all albums and album details can be fetched as JSON via the API. The a
 | Method | File           | Description                                   |
 |--------|----------------|-----------------------------------------------|
 | GET    | /albums/       | Lists all albums and meta data for each album |
-| GET    | /albums/:album | Lists all images of an album                  |
+| GET    | /albums/:album | Lists complete meta data and images of album  |
