@@ -36,7 +36,7 @@ export default function ImageView(props) {
       </div>
       <div className="wrapper wrapper-images">
         {sortedImages.map(image => (
-          <ImageThumbnail album={album.id} image={image} />
+          <ImageThumbnail album={album.id} image={image} key={image} />
         ))}
       </div>
       <div className="back-button">

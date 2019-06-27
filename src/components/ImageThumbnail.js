@@ -3,7 +3,7 @@ import React from 'react';
 export default function ImageThumbnail(props) {
   const albumId = props.album;
   const image = props.image;
-  const url = `/${albumId}/${image}`;
+  const url = `/${albumId}/thumbnails/${image}`;
 
   function changeToFallbackImage(event) {
     const fallbackUrl = `/${albumId}/${image}`;
