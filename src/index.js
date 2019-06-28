@@ -11,7 +11,7 @@ import Footer from './components/Footer';
 function App() {
   return (
     <React.Fragment>
-      <Router>
+      <Router basename="/gallery">
         <Header />
         <Switch>
           <Route exact path="/" component={AlbumView} />
