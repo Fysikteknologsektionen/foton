@@ -147,7 +147,6 @@ footer a:hover {
   color: #0366d6;
 }
 
-
 /* LIGHTBOX STYLES */
 
 .lightbox-wrapper {
@@ -183,12 +182,37 @@ footer a:hover {
   cursor: pointer;
 }
 
+.lightbox-button:hover {
+  color: #aaa;
+}
+
 .lightbox-arrow {
   padding: 30px;
 }
 
-.lightbox-close {
+.lightbox-head {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
   position: absolute;
   top: 20px;
   right: 30px;
+}
+
+.lightbox-head * {
+  padding: 5px;
+}
+
+.lightbox-head a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.lightbox-viewfull {
+  font-size: 25px;
+}
+
+.lightbox-close {
+  margin-top: 1px;
 }

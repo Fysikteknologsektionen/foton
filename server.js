@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(expressValidator());
 
 app.use(express.static(path.join(__dirname, 'build')));
-app.use(express.static(path.join(__dirname, 'files')));
+app.use('/files', express.static(path.join(__dirname, 'files')));
 
 app.use('/', router);
 

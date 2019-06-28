@@ -75,11 +75,18 @@ export default function ImageView(props) {
       </div>
 
       <div className="lightbox-wrapper" style={{ display: lightboxVisible ? 'block' : 'none' }}>
-        <div className="lightbox-button lightbox-close" onClick={hideSlide}>
-          &#215;
+        <div className="lightbox-head">
+         <Link to={`/files/${album.id}/${sortedImages[currentSlide]}`}>
+            <div className="lightbox-button lightbox-viewfull">
+              &#9974;
+            </div>
+          </Link>
+          <div className="lightbox-button lightbox-close" onClick={hideSlide}>
+            &#215;
+          </div>
         </div>
         <div className="lightbox-main">
-        <div
+          <div
             className="lightbox-button lightbox-arrow lightbox-arrow-left"
             onClick={() => {
               showSlide(currentSlide - 1);
@@ -89,7 +96,7 @@ export default function ImageView(props) {
           </div>
           <img 
             className="lightbox-image" 
-            src={`/${album.id}/${sortedImages[currentSlide]}`} 
+            src={`/files/${album.id}/${sortedImages[currentSlide]}`} 
             alt={sortedImages[currentSlide]}
           />
           <div
