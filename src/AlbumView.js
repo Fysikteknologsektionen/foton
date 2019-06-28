@@ -13,7 +13,7 @@ export default function AlbumView() {
   };
   
   useEffect(() => {
-    fetch('/albums')
+    fetch('albums')
     .then(res => testForErrors(res))
     .then(data => setAlbums(data))
     .catch(error => {

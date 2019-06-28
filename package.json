@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/ECarlsson/foton/issues"
   },
-  "homepage": "https://github.com/ECarlsson/foton#readme",
+  "homepage": "https://devil.ftek.se/gallery",
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",

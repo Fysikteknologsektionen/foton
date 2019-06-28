@@ -18,7 +18,7 @@ export default function ImageView(props) {
   };
   
   useEffect(() => {
-    fetch(`/albums/${albumId}`)
+    fetch(`albums/${albumId}`)
     .then(res => testForErrors(res))
     .then(data => setAlbum(data))
     .catch(error => {
