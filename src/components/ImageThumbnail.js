@@ -14,9 +14,11 @@ export default function ImageThumbnail(props) {
   return (
     <div className="thumbnail">
       <img 
-      src={url} 
-      alt={image} 
-      onError={changeToFallbackImage} />
+        src={url} 
+        alt={image} 
+        onError={changeToFallbackImage}
+        onClick={props.onClick}
+      />
     </div>
   );
 }

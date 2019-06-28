@@ -6,6 +6,8 @@ export default function ImageView(props) {
   const [album, setAlbum] = useState({
     images: []
   });
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [lightboxVisible, setLightboxVisible] = useState(false);
   const albumId = props.match.params.albumId;
 
   function testForErrors(res) {
@@ -25,6 +27,26 @@ export default function ImageView(props) {
   }, [albumId]);
 
   const sortedImages = album.images.sort();
+
+  function showSlide(n) {
+    console.log(n);
+    // Enalble lightbox slides to wrap around
+    n = n % sortedImages.length;
+    if (n < 0) {
+      n += sortedImages.length;
+    }
+  
+    // Disable scrollbars on background elements
+    document.body.style.overflow = 'hidden';
+  
+    setCurrentSlide(n);
+    setLightboxVisible(true);
+  }
+  
+  function hideSlide() {
+    document.body.style.overflow = 'visible';
+    setLightboxVisible(false);
+  }
   
   return (
     <main>
@@ -35,17 +57,50 @@ export default function ImageView(props) {
         <p className="description">{album.description}</p>
       </div>
       <div className="wrapper wrapper-images">
-        {sortedImages.map(image => (
-          <ImageThumbnail album={album.id} image={image} key={image} />
+        {sortedImages.map((image, index) => (
+          <ImageThumbnail 
+            album={album.id} 
+            image={image} 
+            key={image} 
+            onClick={() => {
+              showSlide(index);
+            }}
+          />
         ))}
       </div>
       <div className="back-button">
-          <Link to="/">
-            &lt; Tillbaka
-          </Link>
+        <Link to="/">
+          &lt; Tillbaka
+        </Link>
+      </div>
+
+      <div className="lightbox-wrapper" style={{ display: lightboxVisible ? 'block' : 'none' }}>
+        <div className="lightbox-button lightbox-close" onClick={hideSlide}>
+          &#215;
         </div>
-      <div className="lightbox">
-        
+        <div className="lightbox-main">
+        <div
+            className="lightbox-button lightbox-arrow lightbox-arrow-left"
+            onClick={() => {
+              showSlide(currentSlide - 1);
+            }}
+          >
+            &#10094;
+          </div>
+          <img 
+            className="lightbox-image" 
+            src={`/${album.id}/${sortedImages[currentSlide]}`} 
+            alt={sortedImages[currentSlide]}
+          />
+          <div
+            className="lightbox-button lightbox-arrow lightbox-arrow-right"
+            onClick={() => {
+              showSlide(currentSlide + 1);
+            }}
+          >
+            &#10095;
+          </div>
+        </div>
       </div>
     </main>
   );
