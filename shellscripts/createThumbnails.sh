@@ -1,35 +1,33 @@
 #!/bin/bash
 
 #Script will create thumbnails for images if they do not already exist. 
-#Script must run as sudo... is this a problem?
 
-pathtopics='/srv/helloworld/bilder'
-categories=$(ls $pathtopics)
+path="../files"
+albums=$(ls $path)
 
-echo $categories
-for category in $categories
+echo $albums
+for album in $albums
 do
-    pathtocat="$pathtopics/$category"
+    pathToAlbum="$path/$album"
 
     # Create directory thumbnails if it does not already exist. 
-    if ls $pathtocat | grep thumbnails --quiet; then 
+    if ls $pathToAlbum | grep thumbnails --quiet; then 
         echo exists
     else
         mkdir $pathtocat/thumbnails
     fi
 
     # Create a list of all pictures in the folder. 
-    files=$(ls $pathtocat | grep -v thumbnails)
+    files=$(ls $pathToAlbum | grep -v thumbnails)
 
     for file in $files
     do
-        filename="${file%%.*}"
-        if ls $pathtocat/thumbnails | grep $filename --quiet; then
+        fileName="${file%%.*}"
+        if ls $pathToAlbum/thumbnails | grep $fileName --quiet; then
             echo exists
         else
-            new_file = "$filename_thumbnail.${file##*.}"
-            #UNTESTED AS DEVIL DOES NOT HAVE IMAGEMAGICK
-            convert -resize '200x200' -gravity center -crop '200x200' $file $newfilename
+            newFile = "$filename_thumbnail.${file##*.}"
+            convert -resize '300x200' -gravity center -crop '300x200' $file $newFile
         fi
     done
 done
