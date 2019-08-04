@@ -4,21 +4,22 @@ const expressValidator = require('express-validator');
 const bodyParser = require('body-parser');
 const router = require('./express/routes.js');
 
-const port = 3002;
+const port = process.env.PORT || 3002;
 const app = express();
 
 app.use(bodyParser.json());
 app.use(expressValidator());
 
 app.use(express.static(path.join(__dirname, 'build')));
-app.use(express.static(path.join(__dirname, 'files')));
+app.use('/files', express.static(path.join(__dirname, 'files')));
 
-app.use('/', router);
+app.use('/albums', router);
 
-app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
 });
 
 app.listen(port, () => {
-  console.log(`Express listening on port ${port}`);
+  console.log(`Express listening on port ${port}...`);
 });
