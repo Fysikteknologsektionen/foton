@@ -25,8 +25,8 @@ do
 	newFile="${fileName}_thumbnail.${fileExtension}"
         if ! ls ${pathToAlbum}/thumbnails | grep -q $newFile; then
             convertedFile="${pathToAlbum}/thumbnails/${newFile}"
-            xDim=identify -format "%wx%h" "${pathToAlbum}/${file}"
-            yDim=identify -format "%wy%h" "${pathToAlbum}/${file}"
+            xDim=identify -format "%w" "${pathToAlbum}/${file}"
+            yDim=identify -format "%h" "${pathToAlbum}/${file}"
             if [$xDim/$yDim -eq "1.5"]; then
                 # Horizontal image
                 convert -resize '420x280' -gravity center -crop '420x280' "${pathToAlbum}/${file}" $convertedFile
