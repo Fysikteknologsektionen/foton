@@ -25,14 +25,15 @@ do
 	newFile="${fileName}_thumbnail.${fileExtension}"
         if ! ls ${pathToAlbum}/thumbnails | grep -q $newFile; then
             convertedFile="${pathToAlbum}/thumbnails/${newFile}"
-            xDim=identify -format "%w" "${pathToAlbum}/${file}"
-            yDim=identify -format "%h" "${pathToAlbum}/${file}"
-            if [$xDim/$yDim -eq "1.5"]; then
-                # Horizontal image
-                convert -resize '420x280' -gravity center -crop '420x280' "${pathToAlbum}/${file}" $convertedFile
+            # Calculate image aspect ratio to decide if horizontal or vertical
+            xDim=$(identify -format "%w" ${pathToAlbum}/${file})
+            yDim=$(identify -format "%h" ${pathToAlbum}/${file})
+            if ((xDim/yDim)); then
+                # Horizontal image (aspect ratio > 1)
+                convert -resize "420x280" -gravity center -crop "420x280" ${pathToAlbum}/${file} $convertedFile
             else
-                # Assume vertical image
-                convert -resize '280x420' -gravity center -crop '280x420' "${pathToAlbum}/${file}" $convertedFile
+                # Assume vertical image (aspect ratio < 1)
+                convert -resize "280x420" -gravity center -crop "280x420" ${pathToAlbum}/${file} $convertedFile
             fi
 	    echo $file
         fi
