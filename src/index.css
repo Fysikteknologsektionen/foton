@@ -167,12 +167,11 @@ footer a:hover {
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  margin-top: 24px;
   width: 100%;
 }
 
 .lightbox-image {
-  width: 60%;
+  height: 90%;
 }
 
 .lightbox-button {
