@@ -24,7 +24,7 @@ export default function ImageView(props) {
     .catch(error => {
       console.error(error);
     });
-    return hideSlide();
+    return () => hideSlide();
   }, [albumId]);
 
   const sortedImages = album.images.sort();
