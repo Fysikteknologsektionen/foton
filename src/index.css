@@ -167,7 +167,7 @@ footer a:hover {
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  height: 100%;
 }
 
 .lightbox-image {
