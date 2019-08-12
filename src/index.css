@@ -42,7 +42,7 @@ a.undecorated {
 }
 
 .logo-ftek {
-  max-width: 96px;
+  max-width: 90px;
   flex-grow: 1;
 }
 
@@ -53,9 +53,9 @@ main {
   border-bottom: 1px solid #cecece ;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 480px) {
   .logo-wrapper {
-    margin: 0 auto 8px auto;
+    margin: 8px auto 8px auto;
   }
 
   .logo {
