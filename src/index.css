@@ -20,11 +20,6 @@ a.undecorated {
   align-items: flex-end;
 }
 
-.logo-wrapper * {
-  flex-grow: 1;
-  flex-shrink: 1;
-}
-
 .logo-wrapper p {
   padding: 0;
   margin: 0;
@@ -43,18 +38,29 @@ a.undecorated {
 
 .logo-foton {
   max-width: 220px;
+  flex-grow: 2.3;
 }
 
 .logo-ftek {
   max-width: 96px;
+  flex-grow: 1;
 }
 
 main {
-  grid-area: main;
   background-color: #f8f8f8;
   padding: 8px 30px;
   border-top: 1px solid #cecece ;
   border-bottom: 1px solid #cecece ;
+}
+
+@media screen and (max-width: 600px) {
+  .logo-wrapper {
+    margin: 0 auto 8px auto;
+  }
+
+  .logo {
+    margin: 0 30px;
+  }
 }
 
 .wrapper {
@@ -142,7 +148,6 @@ main {
 }
 
 footer {
-  grid-area: footer;
   text-align: center;
 }
 
