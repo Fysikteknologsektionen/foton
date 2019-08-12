@@ -214,7 +214,7 @@ footer a:hover {
   flex-wrap: nowrap;
   align-items: stretch;
   position: absolute;
-  top: 20px;
+  top: 8px;
   right: 30px;
 }
 
@@ -235,16 +235,18 @@ footer a:hover {
   margin-top: 1px;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 680px) {
   .lightbox-main {
     display: grid;
     grid-template-columns: auto auto auto auto;
     grid-template-rows: auto 1fr;
     grid-template-areas: 
-      ". arrowleft arrowright ."
-      "image image image image";
+      "image image image image"
+      ". arrowleft arrowright .";
     justify-items: center;
     align-items: center;
+    margin-top: 60px;
+    height: auto;
   }
 
   .lightbox-image {
@@ -253,20 +255,15 @@ footer a:hover {
     max-height: 100%;
   }
 
+  .lightbox-arrow {
+    padding: 20px 40px;
+  }
+
   .lightbox-arrow-left {
     grid-area: arrowleft;
   }
   
   .lightbox-arrow-right {
     grid-area: arrowright;
-  }
-
-  .lightbox-head {
-    flex-direction: column-reverse;
-    align-items: center;
-  }
-
-  .lightbox-head * {
-    padding: 0 5px;
   }
 }
