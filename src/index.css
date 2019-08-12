@@ -6,8 +6,9 @@ body {
   color: #111;
 }
 
-a {
+a, a:active, a:focus {
   outline: none;
+  background-color: transparent;
 }
 
 .logo-wrapper {
@@ -199,7 +200,7 @@ footer a:hover {
   cursor: pointer;
 }
 
-.lightbox-button:hover {
+.lightbox-button:hover, .lightbox-button:active {
   color: #aaa;
 }
 
@@ -244,8 +245,9 @@ footer a:hover {
       ". arrowleft arrowright .";
     justify-items: center;
     align-items: center;
-    margin-top: 60px;
-    height: auto;
+    height: 100%;
+    padding-top: 60px;
+    box-sizing: border-box;
   }
 
   .lightbox-image {
