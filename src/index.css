@@ -143,7 +143,7 @@ main {
   display: inline-block;
 }
 
-.back-button a:hover, .back-button a:focus {
+.back-button a:active {
   color: #0366d6;
 }
 
@@ -160,7 +160,7 @@ footer a {
   color: inherit;
 }
 
-footer a:hover, footer a:focus {
+footer a:active {
   color: #0366d6;
 }
 
@@ -200,7 +200,7 @@ footer a:hover, footer a:focus {
   cursor: pointer;
 }
 
-.lightbox-button:hover, .lightbox-button:focus {
+.lightbox-button:active {
   color: #aaa;
 }
 
