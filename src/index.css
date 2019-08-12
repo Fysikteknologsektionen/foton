@@ -143,7 +143,7 @@ main {
   display: inline-block;
 }
 
-.back-button a:hover {
+.back-button a:hover, .back-button a:focus {
   color: #0366d6;
 }
 
@@ -160,7 +160,7 @@ footer a {
   color: inherit;
 }
 
-footer a:hover {
+footer a:hover, footer a:focus {
   color: #0366d6;
 }
 
@@ -200,7 +200,7 @@ footer a:hover {
   cursor: pointer;
 }
 
-.lightbox-button:hover, .lightbox-button:active {
+.lightbox-button:hover, .lightbox-button:focus {
   color: #aaa;
 }
 
@@ -246,7 +246,7 @@ footer a:hover {
     justify-items: center;
     align-items: center;
     height: 100%;
-    padding-top: 60px;
+    padding-top: 70px;
     box-sizing: border-box;
   }
 
