@@ -22,7 +22,7 @@ export default function AlbumView() {
   }, []);
 
   const sortedAlbums = albums.sort((a, b) => {
-    return a.order - b.order;
+    return b.order - a.order;
   });
 
   return (

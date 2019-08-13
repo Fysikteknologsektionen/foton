@@ -66,13 +66,14 @@ exports.albumList = (async (req, res) => {
       id: album.id,
       name: album.name,
       date: album.date,
-      thumbnail: album.thumbnail
+      thumbnail: album.thumbnail,
+      order: album.order
     }));
     return res.json(response);
   });
 });
 
-// Returns JSON containing album meta nd list of images
+// Returns JSON containing album meta and list of images
 exports.albumDetail = (async (req, res) => {
   const album = req.params.id;
   var files = [];
