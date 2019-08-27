@@ -244,13 +244,13 @@ footer a:active {
 }
 
 @media screen and (max-width: 680px) {
-  .wrapper-albums:nth-last-child(-n+6):first-child,
-  .wrapper-albums:nth-last-child(-n+6):first-child ~ div {
+  .wrapper-albums:nth-last-child(-n+4):first-child,
+  .wrapper-albums:nth-last-child(-n+4):first-child ~ div {
     grid-template-columns: repeat(auto-fit, minmax(340px, 510px));
   }
 
-  .wrapper-images:nth-last-child(-n+6):first-child,
-  .wrapper-images:nth-last-child(-n+6):first-child ~ div {
+  .wrapper-images:nth-last-child(-n+4):first-child,
+  .wrapper-images:nth-last-child(-n+4):first-child ~ div {
     grid-template-columns: repeat(auto-fit, minmax(240px, 360px));
   }
 
