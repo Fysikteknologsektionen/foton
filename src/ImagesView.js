@@ -45,7 +45,7 @@ export default function ImageView(props) {
   }
   
   function hideSlide() {
-    document.body.style.overflow = 'visible';
+    document.body.style.overflow = 'scroll';
     setLightboxVisible(false);
   }
   
