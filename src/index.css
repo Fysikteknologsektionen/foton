@@ -54,7 +54,7 @@ main {
 }
 
 main > *:not(.lightbox-wrapper) {
-  max-width: 1340px;
+  max-width: 1400px;
   margin: auto;
 }
 
