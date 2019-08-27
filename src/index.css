@@ -53,7 +53,7 @@ main {
   border-bottom: 1px solid #cecece ;
 }
 
-main > * {
+main > *:not(.lightbox-wrapper) {
   max-width: 1340px;
   margin: auto;
 }
