@@ -53,6 +53,11 @@ main {
   border-bottom: 1px solid #cecece ;
 }
 
+main > * {
+  max-width: 1340px;
+  margin: auto;
+}
+
 @media screen and (max-width: 500px) {
   .logo-wrapper {
     margin: 8px auto 8px auto;
@@ -64,8 +69,6 @@ main {
 }
 
 .wrapper {
-  max-width: 1340px;
-  margin: auto;
   display: grid;
   justify-items: center;
 }
@@ -83,6 +86,12 @@ main {
 .wrapper-images {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   grid-gap: 16px 16px;
+}
+
+.thumbnail {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
 }
 
 .thumbnail img {
@@ -129,6 +138,7 @@ main {
 
 .images-meta .description {
   margin: 16px 0;
+  word-break: break-all;
 }
 
 .back-button {
