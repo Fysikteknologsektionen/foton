@@ -59,16 +59,6 @@ main > *:not(.lightbox-wrapper) {
   margin: auto;
 }
 
-@media screen and (max-width: 500px) {
-  .logo-wrapper {
-    margin: 8px auto 8px auto;
-  }
-
-  .logo {
-    margin: 0 30px;
-  }
-}
-
 .wrapper {
   display: grid;
   justify-content: center;
@@ -257,11 +247,16 @@ footer a:active {
 @media screen and (max-width: 680px) {
 
   .thumbnail img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    border: 1px solid #cecece;
-    cursor: pointer;
+    max-height: none;
+    border: none;
+  }
+
+  .logo-wrapper {
+    margin: 8px auto 8px auto;
+  }
+
+  .logo {
+    margin: 0 30px;
   }
 
   .lightbox-main {
