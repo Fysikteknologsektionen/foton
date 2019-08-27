@@ -70,7 +70,7 @@ main > * {
 
 .wrapper {
   display: grid;
-  justify-items: center;
+  justify-content: center;
 }
 
 .wrapper a {
@@ -119,10 +119,6 @@ main > * {
 
 .album-meta .date {
   font-size: 10pt;
-}
-
-.images-meta {
-  margin-left: 10px;
 }
 
 .images-meta .name {
