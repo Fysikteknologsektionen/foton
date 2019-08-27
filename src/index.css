@@ -138,8 +138,7 @@ main > *:not(.lightbox-wrapper) {
 }
 
 .back-button {
-  margin: 6px 0;
-  display: inline-block;
+  margin-top: 10px !important;
 }
 
 .back-button a {
