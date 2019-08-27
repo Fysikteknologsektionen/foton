@@ -135,7 +135,6 @@ main > *:not(.lightbox-wrapper) {
 
 .images-meta .description {
   margin: 16px 0;
-  word-break: break-all;
 }
 
 .back-button {
