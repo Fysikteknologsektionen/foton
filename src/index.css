@@ -244,7 +244,7 @@ footer a:active {
   margin-top: 1px;
 }
 
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 550px) {
 
   .thumbnail img {
     max-height: none;
