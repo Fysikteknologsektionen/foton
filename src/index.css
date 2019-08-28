@@ -83,11 +83,13 @@ main > *:not(.lightbox-wrapper) {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .thumbnail img {
-  width: 100%;
+  width: auto;
   height: auto;
+  max-width: 100%;
   max-height: 300px;
   border-radius: 10px;
   border: 1px solid #cecece;
@@ -144,6 +146,7 @@ main > *:not(.lightbox-wrapper) {
 
 footer {
   text-align: center;
+  padding: 8px 30px;
 }
 
 footer div {
