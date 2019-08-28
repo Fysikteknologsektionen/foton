@@ -1,11 +1,11 @@
 import React from 'react';
-import facebook from './facebook.eps';
+import facebook from './facebook.svg';
 
 export default function Footer() {
   return (
     <footer>
       <div>
-        <a href="https://ftek.se/" target="_blank" rel="noopener noreferrer" className="logo logo-facebook">
+        <a href="https://www.facebook.com/FotonChalmers/" target="_blank" rel="noopener noreferrer" className="logo logo-facebook">
           <img src={facebook} alt="Besök oss på Facebook" />
         </a>
       </div>

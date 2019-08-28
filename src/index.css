@@ -155,7 +155,7 @@ footer a {
   color: inherit;
 }
 
-footer a:active {
+footer a:active, a:hover {
   color: #0366d6;
 }
 
