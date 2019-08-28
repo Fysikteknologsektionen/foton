@@ -160,8 +160,8 @@ footer a:active, a:hover {
 }
 
 footer .logo-facebook {
-  width: 32px;
-  height: auto;
+  max-width: 32px;
+  max-height: 32px;
 }
 
 /* LIGHTBOX STYLES */
