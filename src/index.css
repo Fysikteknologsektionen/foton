@@ -79,16 +79,6 @@ main > *:not(.lightbox-wrapper) {
   grid-gap: 16px 16px;
 }
 
-.wrapper-albums:nth-last-child(-n+4):first-child,
-.wrapper-albums:nth-last-child(-n+4):first-child ~ div {
-  grid-template-columns: repeat(auto-fit, minmax(340px, 480px));
-}
-
-.wrapper-images:nth-last-child(-n+4):first-child,
-.wrapper-images:nth-last-child(-n+4):first-child ~ div {
-  grid-template-columns: repeat(auto-fit, minmax(240px, 360px));
-}
-
 .thumbnail {
   display: flex;
   flex-direction: column;
@@ -167,6 +157,11 @@ footer a {
 
 footer a:active {
   color: #0366d6;
+}
+
+footer .logo-facebook {
+  width: 32px;
+  height: auto;
 }
 
 /* LIGHTBOX STYLES */
