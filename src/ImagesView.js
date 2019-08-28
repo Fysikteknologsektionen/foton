@@ -20,7 +20,7 @@ export default function ImageView(props) {
       console.error(error);
     });
     return () => cleanupListeners();
-  }, [albumId, lightboxVisible, currentSlide]);
+  }, [albumId, lightboxVisible, currentSlide, cleanupListeners, handleKeyPress]);
 
   function cleanupListeners() {
     document.removeEventListener('keydown', handleKeyPress, true);
