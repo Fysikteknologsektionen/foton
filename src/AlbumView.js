@@ -21,9 +21,7 @@ export default function AlbumView() {
     });
   }, []);
 
-  const sortedAlbums = albums.sort((a, b) => {
-    return b.order - a.order;
-  });
+  const sortedAlbums = albums.sort().reverse();
 
   return (
     <main>
