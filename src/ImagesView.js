@@ -19,13 +19,10 @@ export default function ImageView(props) {
     .catch(error => {
       console.error(error);
     });
-    return () => cleanupEffect();
+    return () => cleanupListeners();
   }, [albumId, lightboxVisible, currentSlide]);
 
-  function cleanupEffect() {
-    if (!lightboxVisible) {
-      hideSlide();
-    }
+  function cleanupListeners() {
     document.removeEventListener('keydown', handleKeyPress, true);
   }
 
