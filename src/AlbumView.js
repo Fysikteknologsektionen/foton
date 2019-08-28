@@ -24,6 +24,7 @@ export default function AlbumView() {
   const sortedAlbums = albums.sort((a, b) => {
     return a.date < b.date
   });
+  
   return (
     <main>
       <div className="wrapper wrapper-albums">

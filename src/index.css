@@ -70,12 +70,12 @@ main > *:not(.lightbox-wrapper) {
 }
 
 .wrapper-albums {
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(340px, max-content));
   grid-gap: 20px 20px;
 }
 
 .wrapper-images {
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, max-content));
   grid-gap: 16px 16px;
 }
 
