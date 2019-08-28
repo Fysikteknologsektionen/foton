@@ -246,6 +246,7 @@ footer .logo-facebook {
 @media screen and (max-width: 600px) {
 
   .thumbnail img {
+    width: 100%;
     max-height: none;
     border: none;
   }
