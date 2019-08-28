@@ -20,10 +20,12 @@ export default function ImageView(props) {
       console.error(error);
     });
     return () => cleanupEffect();
-  }, [albumId, lightboxVisible]);
+  }, [albumId, lightboxVisible, currentSlide]);
 
   function cleanupEffect() {
-    hideSlide();
+    if (!lightboxVisible) {
+      hideSlide();
+    }
     document.removeEventListener('keydown', handleKeyPress, true);
   }
 
