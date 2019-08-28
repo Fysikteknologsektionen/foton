@@ -19,7 +19,7 @@ $> node server.js
 ```
 The express server will be hosted on port 3002 by default. This behavior can be changed by supplying the environment variable "PORT".
 
-To create thumbnails the server also needs to have the open-source tool ImageMagick installed and a timer to run `shellscripts/createThumbnails.sh` regularly. If thumbnails are not found it will fall back to the full-sized image.
+To create thumbnails the server also needs to have the open-source tool ImageMagick installed and a timer to run `shellscripts/createThumbnails.sh` regularly. If thumbnails are not found it will fall back to the full-sized image. Note: the shell script must be run with the working directory set to the scripts directory for it to function properly.
 
 ## Creating albums and supplying meta information
 Albums are represented by directories under `files`. Each albums require a `meta.json`file that supplies the following keys:
