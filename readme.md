@@ -28,11 +28,10 @@ Albums are represented by directories under `files`. Each albums require a `meta
 * author - Author(s) of the images
 * date - Date of the album
 * thumbnail - The filename of the image contained in the album to be used as album thumbnail
-* order - Integer representing the order albums should be displayed in. Higher integer means the album will be listed earlier in the grid
 
 The album will also have a key given as the name of the album directory. OBS: This has to be safe to use as URL!
 
-Images in albums are sorted alphabetically by their name.
+Albums are sorted by date. Images in albums are sorted alphabetically by their name.
 
 ## API
  A list of all albums and album details can be fetched as JSON via the API. The available parameters are:
