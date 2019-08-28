@@ -147,7 +147,7 @@ footer {
 }
 
 footer div {
-  margin: 16px 0;
+  margin: 10px 0;
 }
 
 footer a {
@@ -155,7 +155,7 @@ footer a {
   color: inherit;
 }
 
-footer a:active, a:hover {
+footer a:active, footer a:hover {
   color: #0366d6;
 }
 

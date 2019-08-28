@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer>
       <div>
-        Om du vill använda bilder eller vill få bilder borttagna, kontakta oss via <a href="mailto:foton@ftek.se">mailto:foton@ftek.se</a> eller via vår <a href="https://www.facebook.com/FotonChalmers/" target="_blank" rel="noopener noreferrer">facebooksida</a>.
+        Om du vill använda bilder eller vill få bilder borttagna, kontakta oss via <a href="mailto:foton@ftek.se">foton@ftek.se</a> eller via vår <a href="https://www.facebook.com/FotonChalmers/" target="_blank" rel="noopener noreferrer">Facebooksida</a>.
       </div>
       <div>
         <a href="https://www.facebook.com/FotonChalmers/" target="_blank" rel="noopener noreferrer" className="logo logo-facebook">
