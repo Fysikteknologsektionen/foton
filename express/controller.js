@@ -51,7 +51,7 @@ exports.albumList = (async (req, res) => {
   const promises = albums.map(async album => {
     try {
       var json = await readMetaFile(album);
-      checkMetaKeys(['name', 'date', 'thumbnail', 'order'], json);
+      checkMetaKeys(['name', 'date', 'thumbnail'], json);
       json.id = album;
       return json;
     } catch (err) {
