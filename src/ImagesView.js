@@ -9,6 +9,23 @@ export default function ImageView(props) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [lightboxVisible, setLightboxVisible] = useState(false);
   const albumId = props.match.params.albumId;
+  
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress, true);
+
+    fetch(`/gallery/albums/${albumId}`)
+    .then(res => testForErrors(res))
+    .then(data => setAlbum(data))
+    .catch(error => {
+      console.error(error);
+    });
+    return () => cleanupEffect();
+  }, [albumId]);
+
+  function cleanupEffect() {
+    hideSlide();
+    document.removeEventListener('keydown', handleKeyPress, true);
+  }
 
   function testForErrors(res) {
     if (!res.ok) {
@@ -16,22 +33,22 @@ export default function ImageView(props) {
     }
     return res.json();
   };
-  
-  useEffect(() => {
-    fetch(`/gallery/albums/${albumId}`)
-    .then(res => testForErrors(res))
-    .then(data => setAlbum(data))
-    .catch(error => {
-      console.error(error);
-    });
-    return () => hideSlide();
-  }, [albumId]);
 
-  const sortedImages = album.images.sort();
+  function handleKeyPress(e) {
+    if (lightboxVisible) {
+      if (e.code === 'ArrowRight') {
+        showSlide(currentSlide + 1);
+      } else if (e.code === 'ArrowLeft') {
+        showSlide(currentSlide - 1);
+      } else if (e.code === 'Escape') {
+        hideSlide();
+      }
+    }
+  }
 
   function showSlide(n) {
     console.log(n);
-    // Enalble lightbox slides to wrap around
+    // Enable lightbox slides to wrap around
     n = n % sortedImages.length;
     if (n < 0) {
       n += sortedImages.length;
@@ -49,6 +66,8 @@ export default function ImageView(props) {
     setLightboxVisible(false);
   }
   
+  const sortedImages = album.images.sort();
+
   return (
     <main>
       <div className="images-meta">
