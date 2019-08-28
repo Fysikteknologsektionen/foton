@@ -20,7 +20,7 @@ export default function ImageView(props) {
       console.error(error);
     });
     return () => cleanupEffect();
-  }, [albumId]);
+  }, [albumId, lightboxVisible]);
 
   function cleanupEffect() {
     hideSlide();
