@@ -3,8 +3,7 @@ import React from 'react';
 export default function ImageThumbnail(props) {
   const albumId = props.album;
   const image = props.image;
-  const thumbnail = `${image.substring(0, image.lastIndexOf('.'))}_thumbnail${image.substring(image.lastIndexOf("."))}`;
-  const url = `/gallery/files/${albumId}/thumbnails/${thumbnail}`;
+  const url = `/gallery/files/${albumId}/thumbnails/${image}`;
 
   function changeToFallbackImage(event) {
     const fallbackUrl = `/gallery/files/${albumId}/${image}`;
