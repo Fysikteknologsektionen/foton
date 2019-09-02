@@ -2,6 +2,8 @@
 
 # Creates thumbnails for images if they do not already exist
 
+# Set working directory to script directory
+cd "$(dirname "$0")"
 path="../files"
 albums=$(ls $path)
 
@@ -15,28 +17,10 @@ do
     	mkdir ${pathToAlbum}/thumbnails
     fi
 
-    # Create a list of all pictures in the folder
-    files=$(ls $pathToAlbum | grep -vE "thumbnails|meta.json")
+    # Replace non-url-friendly characters with friendly equivalents 
+	rename -v -n 's/ÅÄÖåäö /AAOaao-/g' $pathToAlbum
 
-    for file in $files
-    do
-	fileName="${file%.*}"
-	fileExtension="${file##*.}"
-	newFile="${fileName}_thumbnail.${fileExtension}"
-        if ! ls ${pathToAlbum}/thumbnails | grep -q $newFile; then
-            convertedFile="${pathToAlbum}/thumbnails/${newFile}"
-            # Calculate image aspect ratio to decide if horizontal or vertical
-            xDim=$(identify -format "%w" ${pathToAlbum}/${file})
-            yDim=$(identify -format "%h" ${pathToAlbum}/${file})
-            if ((xDim/yDim)); then
-                # Horizontal image (aspect ratio > 1)
-                convert -resize "420x280" -gravity center -crop "420x280" ${pathToAlbum}/${file} $convertedFile
-            else
-                # Assume vertical image (aspect ratio < 1)
-                convert -resize "280x420" -gravity center -crop "280x420" ${pathToAlbum}/${file} $convertedFile
-            fi
-	    echo $file
-        fi
-    done
+    # Use mogrify to bulk convert images
+    mogrify -path ${pathToAlbum}/thumbnails -filter Triangle -define filter:support=2 -thumbnail 420 -unsharp 0.25x0.25+8+0.065 -dither None -posterize 136 -quality 82 -define jpeg:fancy-upsampling=off -define png:compression-filter=5 -define png:compression-level=9 -define png:compression-strategy=1 -define png:exclude-chunk=all -interlace none -colorspace sRGB -strip ${pathToAlbum}/*
 done
 
