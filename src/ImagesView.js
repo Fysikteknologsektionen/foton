@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import ImageThumbnail from './components/ImageThumbnail';
 
@@ -9,9 +9,14 @@ export default function ImageView(props) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [lightboxVisible, setLightboxVisible] = useState(false);
   const albumId = props.match.params.albumId;
-  
+
+  // Return memoized callback functions 
+  const callbackCleanupListeners = useCallback(cleanupListeners, [cleanupListeners]);
+  const callbackHandleKeyPress = useCallback(handleKeyPress, [handleKeyPress]);
+
+  // Register listener and fetch data on component mount
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyPress, true);
+    document.addEventListener('keydown', callbackHandleKeyPress, true);
 
     fetch(`/gallery/albums/${albumId}`)
     .then(res => testForErrors(res))
@@ -19,8 +24,8 @@ export default function ImageView(props) {
     .catch(error => {
       console.error(error);
     });
-    return () => cleanupListeners();
-  }, [albumId, lightboxVisible, currentSlide, cleanupListeners, handleKeyPress]);
+    return () => callbackCleanupListeners();
+  }, [albumId, lightboxVisible, currentSlide, callbackCleanupListeners, callbackHandleKeyPress]);
 
   function cleanupListeners() {
     document.removeEventListener('keydown', handleKeyPress, true);
