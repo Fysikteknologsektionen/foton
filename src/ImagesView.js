@@ -9,27 +9,7 @@ export default function ImageView(props) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [lightboxVisible, setLightboxVisible] = useState(false);
   const albumId = props.match.params.albumId;
-
-  // Return memoized callback functions 
-  const callbackCleanupListeners = useCallback(cleanupListeners, [cleanupListeners]);
-  const callbackHandleKeyPress = useCallback(handleKeyPress, [handleKeyPress]);
-
-  // Register listener and fetch data on component mount
-  useEffect(() => {
-    document.addEventListener('keydown', callbackHandleKeyPress, true);
-
-    fetch(`/gallery/albums/${albumId}`)
-    .then(res => testForErrors(res))
-    .then(data => setAlbum(data))
-    .catch(error => {
-      console.error(error);
-    });
-    return () => callbackCleanupListeners();
-  }, [albumId, lightboxVisible, currentSlide, callbackCleanupListeners, callbackHandleKeyPress]);
-
-  function cleanupListeners() {
-    document.removeEventListener('keydown', handleKeyPress, true);
-  }
+  const sortedImages = album.images.sort();
 
   function testForErrors(res) {
     if (!res.ok) {
@@ -38,19 +18,7 @@ export default function ImageView(props) {
     return res.json();
   };
 
-  function handleKeyPress(e) {
-    if (lightboxVisible) {
-      if (e.code === 'ArrowRight') {
-        showSlide(currentSlide + 1);
-      } else if (e.code === 'ArrowLeft') {
-        showSlide(currentSlide - 1);
-      } else if (e.code === 'Escape') {
-        hideSlide();
-      }
-    }
-  }
-
-  function showSlide(n) {
+  const showSlide = useCallback((n) => {
     console.log(n);
     // Enable lightbox slides to wrap around
     n = n % sortedImages.length;
@@ -63,14 +31,41 @@ export default function ImageView(props) {
   
     setCurrentSlide(n);
     setLightboxVisible(true);
-  }
+  }, [sortedImages.length]);
+
+  const handleKeyPress = useCallback((e) => {
+    if (lightboxVisible) {
+      if (e.code === 'ArrowRight') {
+        showSlide(currentSlide + 1);
+      } else if (e.code === 'ArrowLeft') {
+        showSlide(currentSlide - 1);
+      } else if (e.code === 'Escape') {
+        hideSlide();
+      }
+    }
+  }, [lightboxVisible, currentSlide, showSlide]);
+
+  const cleanupListeners = useCallback(() => {
+    document.removeEventListener('keydown', handleKeyPress, true);
+  }, [handleKeyPress]);
+
+  // Register listener and fetch data on component mount
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress, true);
+
+    fetch(`/gallery/albums/${albumId}`)
+    .then(res => testForErrors(res))
+    .then(data => setAlbum(data))
+    .catch(error => {
+      console.error(error);
+    });
+    return () => cleanupListeners();
+  }, [albumId, lightboxVisible, currentSlide, cleanupListeners, handleKeyPress]);
   
   function hideSlide() {
     document.body.style.overflow = 'scroll';
     setLightboxVisible(false);
   }
-  
-  const sortedImages = album.images.sort();
 
   return (
     <main>
