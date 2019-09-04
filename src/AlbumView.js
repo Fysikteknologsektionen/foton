@@ -21,7 +21,11 @@ export default function AlbumView() {
     });
   }, []);
 
-  const sortedAlbums = albums.sort();
+  const sortedAlbums = albums.sort((a, b) => {
+    if (a.date < b.date) return 1;
+    else if (a.date > b.date) return -1;
+    else return 0;
+  });
   
   return (
     <main>
