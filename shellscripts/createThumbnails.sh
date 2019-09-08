@@ -13,8 +13,11 @@ do
     pathToAlbum="${path}/${album}"
 
     # Create thumbnails directory if it does not already exist 
-    if [ ! -d "${pathToAlbum}/thumbnails" ]; then 
-    	mkdir ${pathToAlbum}/thumbnails
+    if [ -d "${pathToAlbum}/thumbnails" ]
+    then
+    	break
+    else
+        mkdir ${pathToAlbum}/thumbnails
     fi
 
     IFS=$'\n'
