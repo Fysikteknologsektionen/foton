@@ -16,7 +16,7 @@ do
     # Create thumbnails directory if it does not already exist 
     if [ -d "${pathToAlbum}/thumbnails" ]
     then
-    	break
+    	continue
     else
         echo "Creating thumbnails for: ${album}"
         mkdir ${pathToAlbum}/thumbnails
