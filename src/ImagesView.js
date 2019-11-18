@@ -53,7 +53,7 @@ export default function ImageView(props) {
   useEffect(() => {
     document.addEventListener('keydown', handleKeyPress, true);
 
-    fetch(`/gallery/albums/${albumId}`)
+    fetch(`/albums/${albumId}`)
     .then(res => testForErrors(res))
     .then(data => setAlbum(data))
     .catch(error => {
@@ -96,7 +96,7 @@ export default function ImageView(props) {
       <div className="lightbox-wrapper" style={{ display: lightboxVisible ? 'block' : 'none' }}>
         <div className="lightbox-head">
          <a 
-            href={`/gallery/files/${album.id}/${sortedImages[currentSlide]}`}
+            href={`/files/${album.id}/${sortedImages[currentSlide]}`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -119,7 +119,7 @@ export default function ImageView(props) {
           </div>
           <img 
             className="lightbox-image" 
-            src={`/gallery/files/${album.id}/${sortedImages[currentSlide]}`} 
+            src={`/files/${album.id}/${sortedImages[currentSlide]}`} 
             alt={sortedImages[currentSlide]}
           />
           <div
