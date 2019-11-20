@@ -11,6 +11,10 @@ export default function ImageView(props) {
   const albumId = props.match.params.albumId;
   const sortedImages = album.images.sort();
 
+  /**
+   * Test fetch response header for errors
+   * @param {object} res 
+   */
   function testForErrors(res) {
     if (!res.ok) {
       throw new Error(`${res.status} ${res.statusText}`);
@@ -18,8 +22,11 @@ export default function ImageView(props) {
     return res.json();
   };
 
+  /**
+   * Show lightbox with specific slide
+   * @param {String} n - Index of slide to show
+   */
   const showSlide = useCallback((n) => {
-    console.log(n);
     // Enable lightbox slides to wrap around
     n = n % sortedImages.length;
     if (n < 0) {
@@ -33,6 +40,10 @@ export default function ImageView(props) {
     setLightboxVisible(true);
   }, [sortedImages.length]);
 
+  /**
+   * Handle keypresses when lightbox is visible
+   * @param {object} e - Event object
+   */
   const handleKeyPress = useCallback((e) => {
     if (lightboxVisible) {
       if (e.code === 'ArrowRight') {
@@ -45,23 +56,38 @@ export default function ImageView(props) {
     }
   }, [lightboxVisible, currentSlide, showSlide]);
 
+  /**
+   * Unregister eventlisteners on cleanup
+   */
   const cleanupListeners = useCallback(() => {
     document.removeEventListener('keydown', handleKeyPress, true);
   }, [handleKeyPress]);
 
-  // Register listener and fetch data on component mount
+  /** 
+   * Fetch image data on mount
+  */
+  useEffect(() => {
+    fetch(`/albums/${albumId}`)
+      .then(res => testForErrors(res))
+      .then(data => setAlbum(data))
+      .catch(error => {
+        console.error(error);
+      });
+  }, [albumId]);
+
+  /**
+   * Register eventlisteners
+   */
   useEffect(() => {
     document.addEventListener('keydown', handleKeyPress, true);
-
-    fetch(`/albums/${albumId}`)
-    .then(res => testForErrors(res))
-    .then(data => setAlbum(data))
-    .catch(error => {
-      console.error(error);
-    });
+    
+    // Called on unmount
     return () => cleanupListeners();
-  }, [albumId, lightboxVisible, currentSlide, cleanupListeners, handleKeyPress]);
+  }, [cleanupListeners, handleKeyPress]);
   
+  /**
+   * Hide lightbox
+   */
   function hideSlide() {
     document.body.style.overflow = 'scroll';
     setLightboxVisible(false);
