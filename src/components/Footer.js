@@ -2,6 +2,7 @@ import React from 'react';
 import facebook from './facebook.svg';
 
 export default function Footer() {
+  
   return (
     <footer>
       <div>

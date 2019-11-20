@@ -1,10 +1,15 @@
 import React from 'react';
 
 export default function AlbumThumbnail(props) {
+
   const meta = props;
   const image = meta.thumbnail;
   const url = `/files/${meta.id}/thumbnails/${image}`;
 
+  /**
+   * Changes from thumbnail to fullsize backup image
+   * @param {object} event - Error event object
+   */
   function changeToFallbackImage(event) {
     const fallbackUrl = `/files/${meta.id}/${image}`;
     event.target.onError = null;
