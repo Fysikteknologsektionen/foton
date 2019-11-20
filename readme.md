@@ -1,7 +1,7 @@
 # Foton Webgallery
-Webgallery used by Foton at Fysikteknologsektionen at Chalmers University of Technology. Uses Node.js. Finished project at [ftek.se/gallery/](https://ftek.se/gallery/).
+Webgallery used by Photon at the Physics Division at the Chalmers University of Technology. Uses Node.js. Finished project at [foton.ftek.se](https://foton.ftek.se).
 
-Developed by Fysikteknologsektionens webgroup Spidera for Foton.
+Developed by the Physics Student Divison's webgroup Spidera for the photo committee Photon.
 
 ## Requirements
 * Node.js
@@ -29,7 +29,7 @@ Albums are represented by directories under `files`. Each albums require a `meta
 * date - Date of the album
 * thumbnail - The filename of the image contained in the album to be used as album thumbnail
 
-The album will also have a key given as the name of the album directory. OBS: This has to be safe to use as URL!
+The album will also have a key given as the name of the album directory.
 
 Albums are sorted by date. Images in albums are sorted alphabetically by their name.
 
