@@ -34,7 +34,7 @@ export default function ImageView(props) {
     }
   
     // Disable scrollbars on background elements
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflowY = 'hidden';
   
     setCurrentSlide(n);
     setLightboxVisible(true);
@@ -86,10 +86,17 @@ export default function ImageView(props) {
   }, [cleanupListeners, handleKeyPress]);
   
   /**
+   * Called on unmount to ensure scrollbar on page change
+   */
+  useEffect(() => {
+    return () => (document.body.style.overflowY = 'scroll');
+  }, [])
+
+  /**
    * Hide lightbox
    */
   function hideSlide() {
-    document.body.style.overflow = 'scroll';
+    document.body.style.overflowY = 'scroll';
     setLightboxVisible(false);
   }
 
