@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ImageThumbnail from './components/ImageThumbnail';
 
 export default function ImageView(props) {
+  
   const [album, setAlbum] = useState({
     images: []
   });

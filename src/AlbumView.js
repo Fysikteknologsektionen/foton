@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom';
 import AlbumThumbnail from './components/AlbumThumbnail';
 
 export default function AlbumView() {
+
   const [albums, setAlbums] = useState([]);
 
+  /**
+   * Test fetch response header for errors
+   * @param {object} res 
+   */
   function testForErrors(res) {
     if (!res.ok) {
       throw new Error(`${res.status} ${res.statusText}`);
@@ -12,6 +17,9 @@ export default function AlbumView() {
     return res.json();
   };
   
+  /** 
+   * Fetch image data on mount
+   */
   useEffect(() => {
     fetch('/albums')
     .then(res => testForErrors(res))
@@ -21,6 +29,9 @@ export default function AlbumView() {
     });
   }, []);
 
+  /**
+   * Sort albums by date
+   */
   const sortedAlbums = albums.sort((a, b) => {
     if (a.date < b.date) return 1;
     else if (a.date > b.date) return -1;

@@ -10,6 +10,21 @@ body {
 a, a:active, a:focus {
   outline: none;
   background-color: transparent;
+  text-decoration: none;
+  color: inherit;
+}
+
+.not-found {
+  margin: auto 0;
+  text-align: center;
+}
+
+.not-found h2 {
+  font-weight: normal;
+}
+
+.not-found a:active, .not-found a:hover {
+  color: #0366d6;
 }
 
 .logo-wrapper {
@@ -62,11 +77,6 @@ main > *:not(.lightbox-wrapper) {
 .wrapper {
   display: grid;
   justify-content: center;
-}
-
-.wrapper a {
-  text-decoration: none;
-  color: inherit;
 }
 
 .wrapper-albums {
@@ -136,12 +146,10 @@ main > *:not(.lightbox-wrapper) {
 
 .back-button a {
   padding: 10px;
-  text-decoration: none;
-  color: inherit;
   display: inline-block;
 }
 
-.back-button a:active {
+.back-button a:active, .back-button a:hover {
   color: #0366d6;
 }
 
@@ -152,11 +160,6 @@ footer {
 
 footer div {
   margin: 10px 0;
-}
-
-footer a {
-  text-decoration: none;
-  color: inherit;
 }
 
 footer a:active, footer a:hover {
@@ -229,11 +232,6 @@ footer .logo-facebook {
 
 .lightbox-head * {
   padding: 5px;
-}
-
-.lightbox-head a {
-  text-decoration: none;
-  color: inherit;
 }
 
 .lightbox-viewfull {
