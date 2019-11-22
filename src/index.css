@@ -278,6 +278,7 @@ footer .logo-facebook {
   }
 
   .lightbox-arrow {
+    position: absolute;
     padding: 20px 40px;
     bottom: 20px;
   }
