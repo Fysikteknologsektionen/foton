@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import ImageThumbnail from './components/ImageThumbnail';
+import NotFoundView from './NotFoundView';
 
 export default function ImageView(props) {
   
   const [album, setAlbum] = useState({
     images: []
   });
+  const [isAlbumValid, setAlbumValid] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [lightboxVisible, setLightboxVisible] = useState(false);
   const albumId = props.match.params.albumId;
@@ -72,6 +74,7 @@ export default function ImageView(props) {
       .then(res => testForErrors(res))
       .then(data => setAlbum(data))
       .catch(error => {
+        setAlbumValid(true);
         console.error(error);
       });
   }, [albumId]);
@@ -102,6 +105,8 @@ export default function ImageView(props) {
   }
 
   return (
+    // Check if album is valid
+    isAlbumValid ? <NotFoundView /> :
     <main>
       <div className="images-meta">
         <h1 className="name">{album.name}</h1>
