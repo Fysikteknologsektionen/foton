@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AlbumThumbnail from './components/AlbumThumbnail';
+import NotFoundView from './NotFoundView';
+import LoadingIcon from './components/LoadingIcon';
 
 export default function AlbumView() {
 
+  const [isWaitingToRender, setWaitingToRender] = useState(true);
+  const [hasEncounteredError, setEncounteredError] = useState(false);
   const [albums, setAlbums] = useState([]);
 
   /**
@@ -23,8 +27,12 @@ export default function AlbumView() {
   useEffect(() => {
     fetch('/albums')
     .then(res => testForErrors(res))
-    .then(data => setAlbums(data))
+    .then(data => {
+      setAlbums(data);
+      setWaitingToRender(false);
+    })
     .catch(error => {
+      setEncounteredError(true);
       console.error(error);
     });
   }, []);
@@ -39,14 +47,16 @@ export default function AlbumView() {
   });
   
   return (
-    <main>
-      <div className="wrapper wrapper-albums">
-        {sortedAlbums.map(album => (
-          <Link to={`/album/${album.id}`} key={album.id}>
-            <AlbumThumbnail {...album} key={album.id} />
-          </Link>
-        ))}
-      </div>
-    </main>
+    hasEncounteredError ? <NotFoundView /> :
+      isWaitingToRender ? <LoadingIcon /> :
+      <main>
+        <div className="wrapper wrapper-albums">
+          {sortedAlbums.map(album => (
+            <Link to={`/album/${album.id}`} key={album.id}>
+              <AlbumThumbnail {...album} key={album.id} />
+            </Link>
+          ))}
+        </div>
+      </main>
   );
 }

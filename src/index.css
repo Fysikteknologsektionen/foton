@@ -27,6 +27,12 @@ a, a:active, a:focus {
   color: #0366d6;
 }
 
+.loading-spinner {
+  display: block;
+  margin: 100px auto 500px auto;
+  width: 50px;
+}
+
 .logo-wrapper {
   max-width: 1400px;
   margin: 16px auto 8px auto;
@@ -90,6 +96,8 @@ main > *:not(.lightbox-wrapper) {
 }
 
 .thumbnail {
+  background: url('./components/placeholder.jpg') no-repeat;
+  background-size: contain;
   display: flex;
   flex-direction: column;
   justify-content: center;
