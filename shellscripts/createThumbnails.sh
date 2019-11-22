@@ -37,7 +37,10 @@ do
 
     echo "Resizing images..."
     # Bulk resize images to a maximum of 1920x1080
-    mogrify -resize 1920x1080 "${pathToAlbum}/*"
+    mkdir ${pathToAlbum}/fullsize
+    mv "${pathToAlbum}/*" "${pathToAlbum}/fullsize/"
+    mogrify -path "${pathToAlbum}" -resize 1920x1080 "${pathToAlbum}/fullsize/*"
+    mv "${pathToAlbum}/fullsize/meta.json" "${pathToAlbum}"
 
 done
 echo "Finished creating thumbnails. Exiting..."

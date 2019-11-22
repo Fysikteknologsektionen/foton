@@ -140,7 +140,7 @@ export default function ImageView(props) {
         <div className="lightbox-wrapper" style={{ display: lightboxVisible ? 'block' : 'none' }}>
           <div className="lightbox-head">
           <a 
-              href={`/files/${album.id}/${sortedImages[currentSlide]}`}
+              href={`/files/${album.id}/fullsize/${sortedImages[currentSlide]}`}
               target="_blank"
               rel="noopener noreferrer"
             >
