@@ -263,21 +263,12 @@ footer .logo-facebook {
   }
 
   .lightbox-main {
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-template-rows: auto 1fr;
-    grid-template-areas: 
-      "image image image image"
-      ". arrowleft arrowright .";
-    justify-items: center;
-    align-items: center;
     height: 100%;
     padding-top: 70px;
     box-sizing: border-box;
   }
 
   .lightbox-image {
-    grid-area: image;
     max-width: 100%;
     max-height: initial;
     -webkit-user-select: none; /* Safari */        
@@ -288,13 +279,14 @@ footer .logo-facebook {
 
   .lightbox-arrow {
     padding: 20px 40px;
+    bottom: 20px;
   }
 
   .lightbox-arrow-left {
-    grid-area: arrowleft;
+    left: 25%;
   }
   
   .lightbox-arrow-right {
-    grid-area: arrowright;
+    right: 25%;
   }
 }
