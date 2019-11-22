@@ -5,12 +5,12 @@
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ECarlsson/foton.git"
+    "url": "git+https://github.com/ECarlsson/foton-webgallery.git"
   },
   "author": "Spidera",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ECarlsson/foton/issues"
+    "url": "https://github.com/ECarlsson/foton-webgallery/issues"
   },
   "homepage": "https://foton.ftek.se",
   "dependencies": {
