@@ -38,6 +38,13 @@ export default function AlbumView() {
   }, []);
 
   /**
+   * Scroll to top of window on mount
+   */
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  /**
    * Sort albums by date
    */
   const sortedAlbums = albums.sort((a, b) => {

@@ -85,6 +85,13 @@ export default function ImageView(props) {
   }, [albumId]);
 
   /**
+   * Scroll to top of window on mount
+   */
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  /**
    * Register eventlisteners
    */
   useEffect(() => {
