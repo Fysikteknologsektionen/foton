@@ -4,12 +4,33 @@ body {
   padding: 0;
   font-size: 12pt;
   color: #111;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 a, a:active, a:focus {
   outline: none;
   background-color: transparent;
+  text-decoration: none;
+  color: inherit;
+}
+
+.not-found {
+  margin: auto 0;
+  text-align: center;
+}
+
+.not-found h2 {
+  font-weight: normal;
+}
+
+.not-found a:active, .not-found a:hover {
+  color: #0366d6;
+}
+
+.loading-spinner {
+  display: block;
+  margin: 100px auto 500px auto;
+  width: 50px;
 }
 
 .logo-wrapper {
@@ -64,11 +85,6 @@ main > *:not(.lightbox-wrapper) {
   justify-content: center;
 }
 
-.wrapper a {
-  text-decoration: none;
-  color: inherit;
-}
-
 .wrapper-albums {
   grid-template-columns: repeat(auto-fit, minmax(340px, max-content));
   grid-gap: 20px 20px;
@@ -80,6 +96,8 @@ main > *:not(.lightbox-wrapper) {
 }
 
 .thumbnail {
+  background: url('./components/placeholder.jpg') no-repeat;
+  background-size: contain;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -136,12 +154,10 @@ main > *:not(.lightbox-wrapper) {
 
 .back-button a {
   padding: 10px;
-  text-decoration: none;
-  color: inherit;
   display: inline-block;
 }
 
-.back-button a:active {
+.back-button a:active, .back-button a:hover {
   color: #0366d6;
 }
 
@@ -152,11 +168,6 @@ footer {
 
 footer div {
   margin: 10px 0;
-}
-
-footer a {
-  text-decoration: none;
-  color: inherit;
 }
 
 footer a:active, footer a:hover {
@@ -195,6 +206,7 @@ footer .logo-facebook {
   width: auto;
   height: auto;
   max-height: 90%;
+  max-width: 80%;
 }
 
 .lightbox-button {
@@ -230,11 +242,6 @@ footer .logo-facebook {
   padding: 5px;
 }
 
-.lightbox-head a {
-  text-decoration: none;
-  color: inherit;
-}
-
 .lightbox-viewfull {
   font-size: 25px;
 }
@@ -264,23 +271,14 @@ footer .logo-facebook {
   }
 
   .lightbox-main {
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-template-rows: auto 1fr;
-    grid-template-areas: 
-      "image image image image"
-      ". arrowleft arrowright .";
-    justify-items: center;
-    align-items: center;
     height: 100%;
     padding-top: 70px;
     box-sizing: border-box;
   }
 
   .lightbox-image {
-    grid-area: image;
     max-width: 100%;
-    max-height: 100%;
+    max-height: initial;
     -webkit-user-select: none; /* Safari */        
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
@@ -288,14 +286,16 @@ footer .logo-facebook {
   }
 
   .lightbox-arrow {
+    position: absolute;
     padding: 20px 40px;
+    bottom: 20px;
   }
 
   .lightbox-arrow-left {
-    grid-area: arrowleft;
+    left: 25%;
   }
   
   .lightbox-arrow-right {
-    grid-area: arrowright;
+    right: 25%;
   }
 }

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { param } = require('express-validator/check');
-const { promisify } = require('util')
+const { promisify } = require('util');
 
 const readdir = promisify(fs.readdir);
 const readFile = promisify(fs.readFile);
